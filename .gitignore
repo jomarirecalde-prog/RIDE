@@ -1,0 +1,7 @@
+.env
+storage/*
+!storage/.gitkeep
+.idea/
+.vscode/
+java-client/target/
+*.log

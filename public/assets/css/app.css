@@ -1,0 +1,3913 @@
+:root {
+    --primary: #0f2b3d;
+    --primary-dark: #0a1e2c;
+    --accent: #2dd4bf;
+    --accent-hover: #14b8a6;
+    --bg: #f4f7fc;
+    --card: #ffffff;
+    --text: #1a2c3e;
+    --muted: #5b6e8c;
+    --border: #e2edf2;
+    --danger: #b91c1c;
+    --warn: #b45309;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #e2e8f0; border-radius: 8px; }
+::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 8px; }
+
+/* ========= APP SHELL ========= */
+.app-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 280px;
+    background: linear-gradient(180deg, #0f2b3d 0%, #0a1e2c 100%);
+    color: #e0f2fe;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.15);
+    border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar-header {
+    padding: 28px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 20px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    background: #ffffff;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.logo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.logo-text h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: white;
+}
+
+.logo-text span {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    display: block;
+    font-weight: 400;
+}
+
+.nav-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 20px;
+}
+
+.nav-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.nav-section + .nav-section {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-section-label {
+    padding: 0 16px 4px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(203, 213, 230, 0.55);
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    color: #cbd5e6;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav-item i {
+    width: 24px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.nav-mark-count {
+    margin-left: auto;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ef4444;
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0 5px;
+}
+
+.nav-item.active {
+    background: rgba(45, 212, 191, 0.2);
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border-left: 3px solid var(--accent);
+}
+
+.nav-item:hover:not(.active) {
+    background: rgba(255,255,255,0.08);
+    color: white;
+}
+
+.nav-item.nav-item-disabled,
+.nav-item.nav-item-disabled:hover {
+    opacity: 0.65;
+    cursor: not-allowed;
+    background: transparent;
+    color: #cbd5e6;
+    pointer-events: none;
+}
+
+.nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+button.nav-item {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font: inherit;
+    text-align: left;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.nav-item-toggle {
+    cursor: pointer;
+    justify-content: flex-start;
+}
+
+.nav-item-toggle .nav-chevron {
+    margin-left: auto;
+    font-size: 0.7rem;
+    opacity: 0.7;
+    transition: transform 0.2s ease;
+}
+
+.nav-group-collapsible.is-collapsed .nav-submenu,
+.nav-group-collapsible .nav-submenu[hidden] {
+    display: none !important;
+}
+
+.nav-group-collapsible.is-collapsed .nav-item-toggle .nav-chevron {
+    transform: rotate(-90deg);
+}
+
+.nav-submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-left: 12px;
+    margin-left: 16px;
+    border-left: 1px solid rgba(255,255,255,0.12);
+}
+
+.nav-subitem {
+    display: block;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #a8b8cc;
+    text-decoration: none;
+    transition: all 0.2s;
+    line-height: 1.35;
+}
+
+.nav-subitem:hover {
+    background: rgba(255,255,255,0.06);
+    color: #ffffff;
+}
+
+.nav-subitem.active {
+    background: rgba(45, 212, 191, 0.15);
+    color: #ffffff;
+    border-left: 2px solid var(--accent);
+    padding-left: 12px;
+}
+
+.sidebar-footer {
+    padding: 24px 20px 30px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: auto;
+}
+
+.profile-mini {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    background: var(--accent);
+    width: 44px;
+    height: 44px;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.avatar.avatar-image {
+    object-fit: cover;
+    padding: 0;
+    background: var(--border);
+}
+
+.profile-info p {
+    font-weight: 600;
+    color: white;
+}
+
+.profile-info small {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    word-break: break-all;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 40px;
+    background: rgba(255,255,255,0.05);
+    transition: 0.2s;
+    cursor: pointer;
+    color: #f1f5f9;
+    text-decoration: none;
+}
+
+.logout-btn:hover {
+    background: rgba(220, 38, 38, 0.2);
+    color: #ffb3b3;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    min-width: 0;
+}
+
+.top-bar {
+    background: white;
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.page-title h1 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #0a2b3b;
+    letter-spacing: -0.3px;
+}
+
+.page-title p {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.header-actions {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+}
+
+.notification-bell {
+    position: relative;
+    background: #f1f5f9;
+    padding: 10px;
+    border-radius: 40px;
+    cursor: pointer;
+    color: var(--text);
+    text-decoration: none;
+}
+
+.badge-new {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: #ef4444;
+    color: white;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 30px;
+    font-weight: bold;
+}
+
+.user-welcome {
+    font-weight: 600;
+    background: #eef2ff;
+    padding: 6px 14px;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text);
+    text-decoration: none;
+}
+
+.page-body {
+    padding: 28px 32px;
+    flex: 1;
+}
+
+.auth-main {
+    max-width: 720px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* ========= DASHBOARD ========= */
+.dashboard-container {
+    padding: 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 28px;
+    padding: 20px 16px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.02);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #e9f0f5;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 30px -12px rgba(0,0,0,0.1);
+}
+
+.stat-number {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: #0f3b4f;
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #5f7f9a;
+    margin-top: 8px;
+}
+
+.workflow-section {
+    background: white;
+    border-radius: 28px;
+    padding: 24px;
+    margin-bottom: 32px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+    border: 1px solid #eef3f8;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.section-header h3 {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #1e3a5f;
+}
+
+.badge-count {
+    background: #eef2ff;
+    padding: 6px 14px;
+    border-radius: 60px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-between;
+}
+
+.chip {
+    background: #f8fafc;
+    border-radius: 60px;
+    padding: 10px 18px;
+    text-align: center;
+    flex: 1;
+    min-width: 85px;
+    transition: all 0.1s;
+    border: 1px solid var(--border);
+}
+
+.chip .count {
+    font-weight: 800;
+    font-size: 1.5rem;
+    display: block;
+    color: #1e3a8a;
+}
+
+.chip .label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #46688a;
+}
+
+.chip.approved { background: #e0f2fe; border-color: #bae6fd; }
+.chip.ongoing { background: #dcfce7; border-color: #bbf7d0; }
+.chip.returned { background: #ffe4e2; border-color: #ffcdc9; }
+
+.insight-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-bottom: 32px;
+}
+
+.insight-card {
+    background: white;
+    border-radius: 28px;
+    padding: 20px 24px;
+    flex: 1;
+    min-width: 220px;
+    border: 1px solid #ecf3f9;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.insight-title {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #2c4c6e;
+}
+
+.insight-icon-teal { color: #2c7a7b; }
+.insight-icon-warn { color: #e07c3c; }
+
+.insight-number {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #0f3b4f;
+}
+
+.alert-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid #f0f4f9;
+}
+
+.alert-item-inline {
+    border-bottom: 0;
+    padding-left: 0;
+}
+
+.alert-text { font-weight: 500; }
+.alert-text-muted { font-size: 0.8rem; color: var(--muted); }
+.alert-dot { color: var(--accent); font-size: 0.5rem; margin-right: 4px; }
+
+.alert-badge {
+    background: #fee2e2;
+    color: var(--danger);
+    border-radius: 100px;
+    padding: 4px 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.view-link {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #2c7a7b;
+    text-decoration: none;
+}
+
+.view-link:hover { text-decoration: underline; }
+
+.recent-table {
+    background: white;
+    border-radius: 28px;
+    padding: 20px 24px;
+    border: 1px solid #eef3f8;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.table-header h3 {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #1e3a5f;
+}
+
+.empty-state {
+    background: #f9fbfd;
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    color: #6b8dae;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    opacity: 0.5;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.btn-create {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    border: none;
+    padding: 10px 22px;
+    border-radius: 34px;
+    font-weight: 700;
+    color: #0c2e3b;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.btn-create:hover {
+    background: var(--accent-hover);
+    transform: scale(0.97);
+    color: white;
+}
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    background: transparent;
+}
+
+.dashboard-table th {
+    border-bottom: 2px solid #eef2f6;
+    padding: 10px 6px;
+    background: transparent;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.dashboard-table td {
+    padding: 14px 6px;
+    border-bottom: 1px solid #f0f4fa;
+}
+
+.proposal-title-cell { font-weight: 500; }
+.date-cell { color: #46688a; }
+.col-action { width: 70px; text-align: right; }
+
+.status-pill {
+    padding: 4px 12px;
+    border-radius: 40px;
+    display: inline-block;
+    font-weight: 500;
+    font-size: 0.75rem;
+}
+
+.status-approved { color: #15803d; background: #e0f2e8; }
+.status-review { color: #b45309; background: #fff0e0; }
+.status-default { color: #2c5282; background: #e6f0fa; }
+
+.row-link {
+    color: #94a3b8;
+    text-decoration: none;
+}
+
+.row-link:hover { color: var(--accent); }
+
+.table-footer {
+    margin-top: 18px;
+    text-align: right;
+}
+
+.bottleneck-list,
+.alert-list {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.bottleneck-list li,
+.alert-list li {
+    margin-bottom: 0.5rem;
+}
+
+.alert-section-title { margin: 0 0 0.5rem; }
+.notification-actions { margin-top: 0.35rem; display: flex; gap: 1rem; }
+
+/* ========= LEGACY / SHARED COMPONENTS ========= */
+.container { max-width: 1100px; margin: 0 auto; padding: 0; }
+.footer { display: none; }
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+.card h2, .card h3 { margin-top: 0; }
+
+.grid { display: grid; gap: 1rem; }
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.grid-4 { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+
+.stat { text-align: center; }
+.stat .value { font-size: 1.75rem; font-weight: 700; color: #0f3b4f; }
+.stat .label { color: var(--muted); font-size: 0.85rem; }
+
+.alert { padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 1rem; }
+.alert-success { background: #d1fae5; color: #065f46; }
+.alert-error { background: #fee2e2; color: var(--danger); }
+
+.auth-box { max-width: 420px; margin: 2rem auto 0; }
+.demo-accounts-table { font-size: 0.85rem; }
+.demo-account-row { cursor: pointer; }
+.demo-account-row:hover { background: #eff6ff; }
+.demo-accounts-table code { font-size: 0.8rem; }
+label { display: block; margin-bottom: 0.25rem; font-weight: 600; font-size: 0.9rem; }
+input, select, textarea {
+    width: 100%;
+    padding: 0.55rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 0.85rem;
+    font: inherit;
+}
+input[type="checkbox"],
+input[type="radio"] {
+    width: auto;
+    margin-bottom: 0;
+    padding: 0;
+    flex-shrink: 0;
+}
+form input[type="text"],
+form input:not([type]),
+form textarea {
+    text-transform: capitalize;
+}
+form input[type="email"],
+form input[type="password"],
+form input[type="url"],
+form input[type="number"],
+form input[type="date"],
+form input[type="datetime-local"],
+form input[type="time"],
+form input[type="month"],
+form input[type="week"],
+form input[type="tel"],
+form input[type="search"],
+form input[type="file"],
+form input[type="hidden"],
+form input.no-capitalize,
+form textarea.no-capitalize {
+    text-transform: none;
+}
+textarea { min-height: 100px; resize: vertical; }
+
+.btn {
+    display: inline-block;
+    padding: 0.55rem 1rem;
+    border: none;
+    border-radius: 34px;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+.btn:hover { opacity: 0.92; }
+.btn-accent { background: var(--accent); color: #0c2e3b; }
+.btn-accent:hover { background: var(--accent-hover); color: #fff; }
+.btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+.btn-danger { background: var(--danger); }
+.btn-sm { padding: 0.35rem 0.65rem; font-size: 0.85rem; }
+
+table { width: 100%; border-collapse: collapse; background: var(--card); }
+th, td { padding: 0.65rem 0.75rem; border-bottom: 1px solid var(--border); text-align: left; }
+th { background: #f9fafb; font-size: 0.85rem; }
+
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+.badge-draft { background: #e5e7eb; }
+.badge-submitted, .badge-under_review { background: #dbeafe; color: #1e40af; }
+.badge-returned { background: #fef3c7; color: var(--warn); }
+.badge-approved, .badge-ongoing { background: #d1fae5; color: #065f46; }
+.badge-completed { background: #ccfbf1; }
+.badge-suspended { background: #fee2e2; color: var(--danger); }
+
+.timeline { list-style: none; padding: 0; }
+.timeline li { padding: 0.75rem; border-left: 3px solid var(--accent); margin-bottom: 0.5rem; background: #f9fafb; }
+.timeline .meta { font-size: 0.8rem; color: var(--muted); }
+
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+
+.muted { color: var(--muted); font-size: 0.9rem; }
+.tabs { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 1rem 0; }
+.tab {
+    padding: 0.45rem 0.85rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--primary);
+    background: var(--card);
+    border: 1px solid var(--border);
+}
+.tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.inline-form { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: flex-end; }
+.inline-form input, .inline-form select { margin-bottom: 0; width: auto; min-width: 140px; }
+.financial-line { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 0.5rem; margin-bottom: 0.5rem; }
+.alert-warn-box { border-left: 4px solid var(--warn); }
+.timeline li.unread { border-left-color: var(--warn); font-weight: 600; }
+
+.monitoring-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.monitoring-subtitle {
+    color: var(--muted);
+    margin: 0.35rem 0 0;
+}
+
+.monitoring-workflow h2 {
+    margin-top: 0;
+}
+
+.monitoring-workflows {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.monitoring-flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.monitoring-flow li {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    background: #f8fafc;
+}
+
+.monitoring-flow li.active {
+    border-color: var(--accent);
+    background: #ecfdf5;
+}
+
+.monitoring-flow li strong {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: var(--primary);
+}
+
+.monitoring-flow li span {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.monitoring-priority {
+    border-left: 4px solid var(--accent);
+}
+
+/* ========= ACCOUNTS MODULE ========= */
+.accounts-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 0;
+}
+
+.accounts-page .card {
+    margin-bottom: 0;
+}
+
+.accounts-stats {
+    margin-bottom: 0;
+}
+
+.accounts-stat {
+    padding: 1rem 1.1rem;
+}
+
+.accounts-stat .value {
+    font-size: 1.5rem;
+}
+
+.accounts-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.accounts-card-header h2 {
+    margin-bottom: 0.35rem;
+}
+
+.accounts-count-badge {
+    flex-shrink: 0;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: #fff7ed;
+    color: #b45309;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.accounts-pending-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.accounts-pending-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #f8fafc;
+    align-items: start;
+}
+
+.accounts-pending-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 0;
+}
+
+.accounts-pending-name {
+    font-size: 1rem;
+    color: var(--primary);
+}
+
+.accounts-pending-email code {
+    font-size: 0.82rem;
+    word-break: break-word;
+}
+
+.accounts-pending-detail {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.accounts-pending-detail i {
+    width: 1rem;
+    margin-right: 0.25rem;
+    color: #94a3b8;
+}
+
+.accounts-approval-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem 0.75rem;
+    align-items: end;
+}
+
+.accounts-approval-buttons {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.accounts-management-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: start;
+}
+
+.accounts-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 0.85rem;
+}
+
+.accounts-form-field label {
+    margin-bottom: 0.25rem;
+}
+
+.accounts-form-field input,
+.accounts-form-field select {
+    margin-bottom: 0.85rem;
+}
+
+.accounts-form-field-span-2 {
+    grid-column: 1 / -1;
+}
+
+.accounts-form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.15rem;
+}
+
+.accounts-inline-action {
+    margin-bottom: 0.85rem;
+}
+
+.accounts-college-add-form {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.accounts-empty-note {
+    margin: 0;
+}
+
+.accounts-list-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.85rem;
+}
+
+.accounts-search {
+    width: min(100%, 280px);
+    margin-bottom: 0;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font: inherit;
+}
+
+.accounts-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -0.15rem;
+    padding: 0 0.15rem;
+}
+
+.accounts-table {
+    width: 100%;
+    min-width: 680px;
+    table-layout: auto;
+}
+
+.accounts-table th,
+.accounts-table td {
+    vertical-align: middle;
+}
+
+.accounts-table .col-email code {
+    font-size: 0.8rem;
+    word-break: break-word;
+}
+
+.accounts-table .col-program {
+    max-width: 10rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.accounts-table .col-created {
+    white-space: nowrap;
+    font-size: 0.85rem;
+}
+
+.accounts-table .col-actions {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.accounts-row-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.accounts-row-actions form {
+    margin: 0;
+}
+
+.accounts-current-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.accounts-college-table-wrap {
+    max-height: 320px;
+    overflow-y: auto;
+}
+
+.accounts-college-table {
+    min-width: 0;
+}
+
+@media (max-width: 1100px) {
+    .accounts-management-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    .accounts-pending-item {
+        grid-template-columns: 1fr;
+    }
+
+    .accounts-approval-form,
+    .accounts-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .accounts-form-field-span-2 {
+        grid-column: auto;
+    }
+}
+
+.proposal-workflow-section {
+    margin-top: 0.5rem;
+}
+
+.proposal-workflow-summary {
+    margin: 0 0 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    color: #92400e;
+}
+
+.proposal-workflow-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.proposal-workflow-step {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    background: #f8fafc;
+}
+
+.proposal-workflow-step--completed {
+    border-color: #86efac;
+    background: #ecfdf5;
+}
+
+.proposal-workflow-step--pending,
+.proposal-workflow-step--returned {
+    border-color: var(--accent);
+    background: #fffbeb;
+    box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.15);
+}
+
+.proposal-workflow-step--upcoming {
+    opacity: 0.85;
+}
+
+.proposal-workflow-step--suspended {
+    border-color: #fca5a5;
+    background: #fef2f2;
+}
+
+.proposal-workflow-step-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.35rem;
+}
+
+.proposal-workflow-step-head strong {
+    color: var(--primary);
+    line-height: 1.35;
+}
+
+.proposal-workflow-badge {
+    flex-shrink: 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.2rem 0.45rem;
+    border-radius: 999px;
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.proposal-workflow-badge--completed {
+    background: #bbf7d0;
+    color: #166534;
+}
+
+.proposal-workflow-badge--pending,
+.proposal-workflow-badge--returned {
+    background: #fde68a;
+    color: #92400e;
+}
+
+.proposal-workflow-badge--suspended {
+    background: #fecaca;
+    color: #991b1b;
+}
+
+.proposal-workflow-description {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.proposal-workflow-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.75rem;
+    margin-top: 0.65rem;
+    font-size: 0.82rem;
+    color: #334155;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+@media (max-width: 800px) {
+    .sidebar {
+        width: 80px;
+        overflow-x: hidden;
+    }
+    .sidebar .logo-text span,
+    .sidebar .logo-text h2,
+    .sidebar .nav-item span,
+    .sidebar .nav-subitem span,
+    .profile-mini .profile-info,
+    .logout-btn span {
+        display: none;
+    }
+    .nav-item { justify-content: center; }
+    .nav-submenu {
+        padding-left: 0;
+        margin-left: 0;
+        border-left: none;
+    }
+    .sidebar-header { padding: 20px 8px; }
+    .nav-menu { padding: 0 8px; }
+    .avatar { margin: 0 auto; }
+    .profile-mini { justify-content: center; }
+    .logout-btn { justify-content: center; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .page-body { padding: 20px 16px; }
+    .top-bar { padding: 16px; }
+}
+
+@media (max-width: 640px) {
+    table { font-size: 0.85rem; }
+    .financial-line { grid-template-columns: 1fr; }
+    .insight-row { flex-direction: column; }
+    .status-chips { justify-content: center; }
+    .chip { min-width: calc(50% - 8px); flex: 0 1 calc(50% - 8px); }
+}
+
+.proposal-paper {
+    background: #fff;
+    border: 1px solid #111;
+    padding: 1rem;
+    color: #111;
+}
+
+.page-actions-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.proposal-page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.proposal-page-heading h1 {
+    margin: 0 0 0.2rem;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.proposal-page-subtitle {
+    margin: 0;
+    color: var(--muted);
+}
+
+.proposal-page-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.proposal-section {
+    margin-bottom: 1.5rem;
+}
+
+.proposal-section-title,
+.proposal-subtitle {
+    margin: 0 0 0.5rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 700;
+    color: #111;
+}
+
+.proposal-section-title {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+}
+
+.proposal-subtitle {
+    font-size: 1.05rem;
+}
+
+.proposal-subtitle span,
+.proposal-section-note,
+.proposal-section-note-inline {
+    font-style: italic;
+    font-weight: 400;
+    color: #333;
+}
+
+.proposal-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: #fff;
+}
+
+.proposal-table th,
+.proposal-table td {
+    border: 1px solid #111;
+    padding: 0.45rem 0.55rem;
+    vertical-align: top;
+    background: #fff;
+    color: #111;
+}
+
+.proposal-table th {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.95rem;
+}
+
+.proposal-table-wrap {
+    overflow-x: auto;
+}
+
+.proposal-row-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.proposal-row-actions form {
+    margin: 0;
+}
+
+.proposal-delete-icon-btn,
+.proposal-icon-btn {
+    box-sizing: border-box;
+    min-width: 2rem;
+    width: 2rem;
+    height: 2rem;
+    padding: 0 !important;
+    line-height: 1;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 6px;
+    vertical-align: middle;
+}
+
+.proposal-icon-btn i {
+    display: block;
+    font-size: 0.875rem;
+    line-height: 1;
+    width: 1em;
+    text-align: center;
+}
+
+.proposal-registry-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.proposal-registry-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1 1 16rem;
+    max-width: 22rem;
+    min-width: 12rem;
+}
+
+.proposal-registry-search-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    margin: 0;
+    color: var(--muted);
+    line-height: 1;
+}
+
+.proposal-registry-search {
+    flex: 1;
+    margin: 0;
+    padding: 0.45rem 0.65rem;
+    border: 1px solid #111;
+    border-radius: 0;
+    font: inherit;
+    background: #fff;
+    color: #111;
+}
+
+.proposal-registry-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.proposal-registry-table {
+    table-layout: auto;
+    min-width: 0;
+}
+
+.proposal-registry-table th,
+.proposal-registry-table td {
+    vertical-align: middle;
+}
+
+.proposal-registry-table .col-code {
+    width: 7.5rem;
+    white-space: nowrap;
+}
+
+.proposal-registry-table .col-title {
+    min-width: 10rem;
+    max-width: 18rem;
+}
+
+.proposal-registry-table .col-college {
+    min-width: 7rem;
+    max-width: 11rem;
+}
+
+.proposal-registry-table .col-type {
+    width: 5.5rem;
+    white-space: nowrap;
+}
+
+.proposal-registry-table .col-researcher {
+    min-width: 7rem;
+    max-width: 10rem;
+}
+
+.proposal-registry-table .col-role,
+.proposal-registry-table .col-status {
+    width: 6.5rem;
+    white-space: nowrap;
+}
+
+.proposal-registry-table .col-step {
+    min-width: 6.5rem;
+    max-width: 9rem;
+    font-size: 0.85rem;
+}
+
+.proposal-registry-table .col-actions {
+    width: 1%;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.proposal-registry-code {
+    font-size: 0.8rem;
+    word-break: break-all;
+}
+
+.proposal-registry-title {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.proposal-registry-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    flex-wrap: nowrap;
+    min-height: 2rem;
+}
+
+.proposal-registry-actions form {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.proposal-registry-actions .btn.btn-sm.proposal-icon-btn {
+    margin: 0;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.proposal-table-meta {
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.proposal-table input,
+.proposal-table select,
+.proposal-table textarea,
+.proposal-textarea {
+    width: 100%;
+    border: 0;
+    border-radius: 0;
+    margin: 0;
+    padding: 0.35rem 0;
+    background: transparent;
+    color: #111;
+}
+
+.proposal-textarea {
+    min-height: 200px;
+    border: 1px solid #111;
+    padding: 0.7rem 0.8rem;
+    overflow-x: auto;
+    overflow-y: auto;
+    resize: vertical;
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
+
+.proposal-textarea-lg {
+    min-height: 280px;
+}
+
+.proposal-inline-grid {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.proposal-inline-grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.proposal-inline-label {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.proposal-static-value {
+    min-height: 1.4rem;
+    padding-bottom: 0.15rem;
+    border-bottom: 1px solid #111;
+}
+
+.proposal-static-muted {
+    color: #666;
+    font-style: italic;
+}
+
+.proposal-coauthors-cell {
+    padding: 0 !important;
+}
+
+.proposal-coauthors-table {
+    width: 100%;
+}
+
+.proposal-coauthors-wrap {
+    padding: 0;
+}
+
+.proposal-coauthors-table th,
+.proposal-coauthors-table td {
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.proposal-coauthors-table tr:first-child th {
+    border-top: 0;
+}
+
+.proposal-coauthors-table th:first-child,
+.proposal-coauthors-table td:first-child {
+    border-left: 0;
+}
+
+.proposal-coauthors-action-col,
+.proposal-coauthors-action-cell {
+    width: 7.5rem;
+    text-align: center;
+}
+
+.proposal-coauthors-action-cell .btn {
+    width: 100%;
+}
+
+.proposal-coauthors-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.6rem 0.55rem;
+    border-top: 1px solid #111;
+}
+
+.proposal-coauthor-picker {
+    display: grid;
+    gap: 0.5rem;
+    margin-bottom: 0.85rem;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid #c5d3e3;
+    border-radius: 6px;
+    background: #f7fafc;
+}
+
+.proposal-coauthor-picker-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #1f3854;
+}
+
+.proposal-coauthor-search {
+    width: 100%;
+    max-width: 28rem;
+}
+
+.proposal-coauthor-select {
+    width: 100%;
+    max-width: 36rem;
+    min-height: 9rem;
+}
+
+.proposal-coauthor-source-cell {
+    min-width: 7.5rem;
+    vertical-align: middle;
+}
+
+.proposal-coauthor-source-cell .badge {
+    display: inline-block;
+    margin-bottom: 0.25rem;
+}
+
+.proposal-coauthors-table textarea.proposal-coauthor-field {
+    min-height: 3.25rem;
+    min-width: 11rem;
+    resize: vertical;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: pre-wrap;
+    line-height: 1.45;
+}
+
+.proposal-coauthors-table th:nth-child(2),
+.proposal-coauthors-table th:nth-child(3),
+.proposal-coauthors-table th:nth-child(4),
+.proposal-coauthors-table td:nth-child(2),
+.proposal-coauthors-table td:nth-child(3),
+.proposal-coauthors-table td:nth-child(4) {
+    min-width: 11rem;
+}
+
+.proposal-checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    font-weight: 400;
+}
+
+.proposal-checkbox-row input {
+    width: auto;
+    margin: 0;
+}
+
+.proposal-checkboxes {
+    margin-top: 1rem;
+}
+
+.proposal-check-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.35rem 1.25rem;
+    margin-top: 0.5rem;
+}
+
+.settings-option-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin: 1rem 0;
+    align-items: flex-start;
+}
+
+.settings-option-item {
+    align-items: flex-start;
+    cursor: pointer;
+    max-width: 100%;
+}
+
+.proposal-check-item {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin: 0;
+    font-weight: 400;
+}
+
+.proposal-check-item input {
+    width: auto;
+    margin: 0;
+}
+
+.proposal-guidelines {
+    margin: 0 0 1rem;
+    padding-left: 1.2rem;
+}
+
+.proposal-guidelines li {
+    margin-bottom: 0.35rem;
+}
+
+.proposal-budget-total {
+    max-width: 320px;
+    margin-bottom: 0.75rem;
+}
+
+.proposal-budget-table td {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.proposal-budget-table input,
+.proposal-budget-table textarea {
+    padding: 0.2rem 0;
+}
+
+.proposal-budget-input {
+    min-height: 3rem;
+    resize: vertical;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.45;
+}
+
+.proposal-plan-table {
+    width: 100%;
+    table-layout: fixed;
+    min-width: 0;
+}
+
+.proposal-plan-table th,
+.proposal-plan-table td {
+    text-align: center;
+    padding: 0.3rem 0.25rem;
+}
+
+.proposal-plan-table .proposal-plan-activity {
+    width: 40%;
+}
+
+.proposal-plan-month {
+    width: 5%;
+    font-size: 0.75rem;
+    white-space: nowrap;
+}
+
+.proposal-plan-table td:first-child,
+.proposal-plan-activity-cell {
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.proposal-plan-table td:first-child input,
+.proposal-plan-table td:first-child textarea {
+    min-width: 0;
+}
+
+.proposal-plan-activity-input {
+    min-height: 5.5rem;
+    resize: vertical;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.45;
+}
+
+.proposal-plan-check {
+    width: 5%;
+}
+
+.proposal-plan-check input {
+    width: auto;
+    margin: 0;
+    display: block;
+    margin-inline: auto;
+}
+
+.proposal-form-actions {
+    margin-top: 1.5rem;
+}
+
+.proposal-form-actions .btn-accent:disabled,
+.proposal-form-actions .btn-accent[aria-disabled="true"] {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.proposal-submit-blocked-note {
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+}
+
+.proposal-textarea-compact {
+    min-height: 4.5rem;
+}
+
+.manuscript-origin-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
+    align-items: center;
+    margin-top: 0.75rem;
+}
+
+.manuscript-origin-date {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.manuscript-signatures {
+    margin-top: 2rem;
+}
+
+.manuscript-signature-row {
+    margin-top: 2.25rem;
+    text-align: center;
+}
+
+.manuscript-signature-row:first-child {
+    margin-top: 0;
+}
+
+.manuscript-signature-label {
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    text-align: left;
+}
+
+.manuscript-signature-block {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-inline: auto;
+    max-width: 100%;
+    width: max-content;
+}
+
+.manuscript-signature-block--empty {
+    min-width: 12rem;
+}
+
+.manuscript-signature-name {
+    white-space: nowrap;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    min-height: 1.35rem;
+    margin-top: 0.35rem;
+}
+
+.manuscript-signature-identity {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 100%;
+    width: max-content;
+    margin-inline: auto;
+}
+
+.manuscript-signature-image {
+    margin-bottom: 0.15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 2.5rem;
+}
+
+.manuscript-signature-image--empty {
+    min-height: 2.5rem;
+}
+
+.manuscript-signature-image .proposal-signature-image {
+    max-height: 3rem;
+}
+
+.manuscript-signature-line {
+    width: 100%;
+    border-bottom: 1px solid #111;
+    margin-top: 0;
+    min-height: 0;
+}
+
+.manuscript-signature-role {
+    margin-top: 0.4rem;
+    font-size: 0.9rem;
+    line-height: 1.35;
+    max-width: 18rem;
+}
+
+.manuscript-signature-date {
+    margin-top: 0.35rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.manuscript-signature-note {
+    text-align: center;
+    margin-top: 1.25rem;
+}
+
+.completed-researches-paper .completed-researches-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.completed-researches-header-line {
+    margin: 0.15rem 0;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+}
+
+.completed-researches-header-line--strong {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.completed-researches-title {
+    margin: 0.75rem 0 0.35rem;
+    font-size: 1.35rem;
+    letter-spacing: 0.04em;
+}
+
+.completed-researches-form-id {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.wpu-funded-extension-header {
+    position: relative;
+}
+
+.wpu-funded-extension-reference {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.95rem;
+}
+
+.wpu-funded-extension-reference input {
+    width: 8rem;
+    max-width: 40vw;
+}
+
+.wpu-funded-extension-reference-display {
+    margin: 0.35rem 0 0;
+    text-align: right;
+}
+
+.wpu-funded-extension-title-input {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.45rem 0.55rem;
+    border: 1px solid #111;
+}
+
+.wpu-funded-extension-summary-table .wpu-funded-extension-summary-actions-col {
+    width: 7.5rem;
+}
+
+.wpu-extension-project-title-cell {
+    width: 16%;
+}
+
+.wpu-extension-summary-total-row th {
+    text-align: left;
+}
+
+.wpu-extension-total-amount {
+    background: #f5f5f5;
+    font-weight: 700;
+    cursor: default;
+}
+
+.completed-researches-add-row-wrap {
+    margin-top: 0.75rem;
+}
+
+/* Rem widths (not %) so columns stay readable and scroll horizontally like trainings forms */
+.completed-researches-table.trainings-conducted-table {
+    table-layout: auto;
+    width: max-content;
+    min-width: 100%;
+}
+
+.completed-researches-table.trainings-conducted-table col.cr-col-title { width: 11rem; min-width: 11rem; }
+.completed-researches-table.trainings-conducted-table col.cr-col-researchers { width: 9rem; min-width: 9rem; }
+.completed-researches-table.trainings-conducted-table col.cr-col-date { width: 8.25rem; min-width: 8.25rem; }
+.completed-researches-table.trainings-conducted-table col.cr-col-duration { width: 5rem; min-width: 5rem; }
+.completed-researches-table.trainings-conducted-table col.cr-col-budget { width: 7rem; min-width: 7rem; }
+.completed-researches-table.trainings-conducted-table col.cr-col-budget + col.cr-col-budget { width: 6.25rem; min-width: 6.25rem; }
+.completed-researches-table.trainings-conducted-table col.cr-col-category { width: 8rem; min-width: 8rem; }
+.completed-researches-table.trainings-conducted-table col.cr-col-remarks { width: 6.5rem; min-width: 6.5rem; }
+.completed-researches-table.trainings-conducted-table col.cr-col-drive-link { width: 10rem; min-width: 10rem; }
+.completed-researches-table.trainings-conducted-table col.cr-col-actions { width: 5.75rem; min-width: 5.75rem; }
+
+.completed-researches-table.trainings-conducted-table th,
+.completed-researches-table.trainings-conducted-table td {
+    min-width: 0;
+}
+
+.completed-researches-table.trainings-conducted-table td .proposal-textarea-compact {
+    min-height: 3.75rem;
+    resize: vertical;
+}
+
+.completed-researches-table.trainings-conducted-table td input[type="date"] {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.15rem;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.completed-researches-table.trainings-conducted-table .cr-col-drive-link-cell {
+    min-width: 10rem;
+}
+.completed-researches-table.trainings-conducted-table .cr-col-drive-link-cell input[type="url"] {
+    min-width: 9rem;
+}
+
+.consolidated-completed-researches-paper .completed-researches-table.trainings-conducted-table col.cr-col-title { width: 11rem; }
+.consolidated-completed-researches-paper .completed-researches-table.trainings-conducted-table col.cr-col-researchers { width: 9rem; }
+.consolidated-completed-researches-paper .completed-researches-table.trainings-conducted-table col.cr-col-date { width: 8.25rem; }
+.consolidated-completed-researches-paper .completed-researches-table.trainings-conducted-table col.cr-col-duration { width: 5rem; }
+.consolidated-completed-researches-paper .completed-researches-table.trainings-conducted-table col.cr-col-budget { width: 7rem; }
+.consolidated-completed-researches-paper .completed-researches-table.trainings-conducted-table col.cr-col-budget + col.cr-col-budget { width: 6.25rem; }
+.consolidated-completed-researches-paper .completed-researches-table.trainings-conducted-table col.cr-col-category { width: 8rem; }
+.consolidated-completed-researches-paper .completed-researches-table.trainings-conducted-table col.cr-col-remarks { width: 6.5rem; }
+.consolidated-completed-researches-paper .completed-researches-table.trainings-conducted-table col.cr-col-drive-link { width: 10rem; }
+.consolidated-completed-researches-paper .completed-researches-table.trainings-conducted-table col.cr-col-actions { width: 5.75rem; }
+
+.consolidated-completed-researches-paper .completed-researches-table td .proposal-textarea-compact {
+    min-height: 3.75rem;
+    resize: vertical;
+}
+
+.consolidated-completed-researches-paper .completed-researches-table td input[type="date"] {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.15rem;
+}
+
+.completed-researches-meta-table th {
+    width: 8rem;
+}
+
+.completed-researches-table {
+    font-size: 0.8rem;
+}
+
+.completed-researches-table th,
+.completed-researches-table td {
+    vertical-align: top;
+}
+
+.completed-researches-table.trainings-conducted-table th,
+.completed-researches-table.trainings-conducted-table td {
+    min-width: 0;
+}
+
+.completed-researches-table input,
+.completed-researches-table textarea {
+    width: 100%;
+}
+
+.completed-researches-table.trainings-conducted-table input,
+.completed-researches-table.trainings-conducted-table textarea {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.completed-researches-actions-col {
+    width: 5.5rem;
+    white-space: nowrap;
+}
+
+.completed-researches-section {
+    margin-top: 1.5rem;
+}
+
+.completed-researches-add-row {
+    margin-top: 0.75rem;
+}
+
+.completed-researches-signoff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+}
+
+.completed-researches-signoff-label {
+    margin: 0 0 0.25rem;
+    font-weight: 600;
+}
+
+.completed-researches-signoff-role {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.inventions-um-paper {
+    margin-bottom: 1.5rem;
+}
+
+.inventions-um-meta-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.inventions-um-meta-row label {
+    display: grid;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.inventions-um-meta-row input,
+.inventions-um-meta-row select {
+    border: 1px solid #111;
+    padding: 0.45rem 0.55rem;
+    font-weight: 400;
+}
+
+.trainings-conducted-section {
+    margin-bottom: 1.5rem;
+}
+
+.trainings-conducted-scroll-hint {
+    margin: 0 0 0.5rem;
+}
+
+.trainings-conducted-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid #111;
+    background: #fff;
+}
+
+.trainings-conducted-table {
+    table-layout: auto;
+    width: max-content;
+    min-width: 100%;
+    font-size: 0.8rem;
+    border-collapse: collapse;
+}
+
+.trainings-conducted-table th,
+.trainings-conducted-table td {
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    line-height: 1.35;
+    hyphens: auto;
+}
+
+.trainings-conducted-table thead th {
+    font-size: 0.78rem;
+    line-height: 1.3;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5rem 0.4rem;
+}
+
+.trainings-conducted-table .tc-footnote {
+    display: block;
+    font-weight: 400;
+    font-size: 0.7rem;
+    margin-top: 0.15rem;
+}
+
+.trainings-conducted-table col.tc-col-program { width: 8.5rem; }
+.trainings-conducted-table col.tc-col-title { width: 8.5rem; }
+.trainings-conducted-table col.tc-col-venue { width: 7rem; }
+.trainings-conducted-table col.tc-col-date { width: 8.25rem; }
+.trainings-conducted-table col.tc-col-participants { width: 7rem; }
+.trainings-conducted-table col.tc-col-count { width: 4.75rem; }
+.trainings-conducted-table col.tc-col-weighted { width: 11.5rem; }
+.trainings-conducted-table col.tc-col-personnel { width: 7rem; }
+.trainings-conducted-table col.tc-col-budget { width: 6.25rem; }
+.trainings-conducted-table col.tc-col-rating { width: 3.35rem; }
+.trainings-conducted-table col.tc-col-actions { width: 5.75rem; }
+
+.trainings-conducted-table .tc-col-actions {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.trainings-conducted-table .tc-col-actions .btn {
+    white-space: normal;
+    line-height: 1.25;
+}
+
+.trainings-conducted-table .tc-col-count,
+.trainings-conducted-table .tc-col-rating {
+    text-align: center;
+}
+
+.trainings-conducted-table .tc-rating-label,
+.trainings-conducted-table .tc-rating-num {
+    display: block;
+    line-height: 1.2;
+}
+
+.trainings-conducted-table .tc-rating-num {
+    font-size: 0.72rem;
+    color: var(--muted);
+}
+
+.trainings-conducted-table .tc-cell-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.4rem;
+    min-width: 0;
+}
+
+.trainings-conducted-table .tc-weighted-display {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.3;
+    color: var(--muted);
+    min-height: 1rem;
+}
+
+.trainings-conducted-table .tc-readonly-value {
+    display: block;
+    text-align: center;
+    font-weight: 600;
+}
+
+.trainings-conducted-table td .proposal-textarea-compact {
+    border: 1px solid #bbb;
+    padding: 0.35rem 0.45rem;
+    box-sizing: border-box;
+    min-height: 2.75rem;
+    resize: vertical;
+    background: #fff;
+}
+
+.trainings-conducted-table td input:not([type="hidden"]),
+.trainings-conducted-table td select {
+    border: 1px solid #bbb;
+    padding: 0.35rem 0.4rem;
+    box-sizing: border-box;
+    background: #fff;
+    max-width: 100%;
+}
+
+.trainings-conducted-table .tc-input-num {
+    text-align: center;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+}
+
+.trainings-conducted-section-row td {
+    background: #f8f9fa;
+    font-weight: 600;
+}
+
+.trainings-conducted-total-row td,
+.trainings-conducted-grand-total-row td {
+    font-weight: 600;
+    background: #f1f3f5;
+}
+
+.trainings-conducted-total-row .tc-total-label,
+.trainings-conducted-grand-total-row .tc-total-label {
+    white-space: nowrap;
+}
+
+.trainings-conducted-total-row .tc-total-persons,
+.trainings-conducted-total-row .tc-total-weighted,
+.trainings-conducted-grand-total-row .tc-grand-total-persons,
+.trainings-conducted-grand-total-row .tc-grand-total-weighted {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.trainings-conducted-total-row .tc-total-spacer,
+.trainings-conducted-grand-total-row .tc-total-spacer {
+    border-left: none;
+    background: #f1f3f5;
+}
+
+.trainings-conducted-add-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.trainings-conducted-paper .proposal-section-note {
+    max-width: none;
+}
+
+.trainings-conducted-documents-table input[type="file"] {
+    width: 100%;
+    max-width: 100%;
+    font-size: 0.85rem;
+}
+
+.trainings-conducted-uploaded-file + .trainings-conducted-uploaded-file {
+    margin-top: 0.35rem;
+}
+
+.technical-advisory-total-row td {
+    font-weight: 600;
+    background: #f1f3f5;
+}
+
+.technical-advisory-total-row .tc-total-label {
+    white-space: normal;
+}
+
+.technology-adoption-table {
+    min-width: 72rem;
+}
+
+.technology-adoption-table .ta-col-no {
+    width: 2.5rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.technology-adoption-summary-row td {
+    font-weight: 600;
+    background: #f1f3f5;
+}
+
+.proposal-numbered-list {
+    margin: 0.5rem 0 1rem 1.25rem;
+    padding: 0;
+}
+
+.proposal-numbered-list li {
+    margin-bottom: 0.35rem;
+}
+
+.inventions-um-table {
+    font-size: 0.8rem;
+}
+
+.inventions-um-table th,
+.inventions-um-table td {
+    vertical-align: top;
+}
+
+.inventions-um-table input {
+    min-height: 1.6rem;
+    padding: 0.15rem 0;
+}
+
+.inventions-um-section-row td,
+.inventions-um-subsection-row td {
+    font-weight: 700;
+    background: #f6f7f9;
+}
+
+.inventions-um-subsection-row td {
+    font-weight: 600;
+    background: #fbfcfd;
+}
+
+.inventions-um-note {
+    margin-top: 0.75rem;
+}
+
+.inventions-um-form-id {
+    margin: 0.75rem 0 0;
+    text-align: right;
+    font-size: 0.8rem;
+    color: #444;
+}
+
+.inventions-um-signoff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3.5rem;
+    margin-top: 2rem;
+}
+
+.inventions-um-sign-line {
+    border-bottom: 1px solid #111;
+    margin-top: 2.75rem;
+}
+
+.research-output-published-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.research-output-published-table.trainings-conducted-table col.rop-col-title { width: 11rem; }
+.research-output-published-table.trainings-conducted-table col.rop-col-date { width: 8.25rem; }
+.research-output-published-table.trainings-conducted-table col.rop-col-duration { width: 4.75rem; }
+.research-output-published-table.trainings-conducted-table col.rop-col-authors { width: 9rem; }
+.research-output-published-table.trainings-conducted-table col.rop-col-article { width: 11rem; }
+.research-output-published-table.trainings-conducted-table col.rop-col-journal { width: 11rem; }
+.research-output-published-table.trainings-conducted-table col.rop-col-editors { width: 8rem; }
+.research-output-published-table.trainings-conducted-table col.rop-col-volume { width: 6.5rem; }
+.research-output-published-table.trainings-conducted-table col.rop-col-pages { width: 5rem; }
+.research-output-published-table.trainings-conducted-table col.rop-col-year { width: 5rem; }
+.research-output-published-table.trainings-conducted-table col.rop-col-indexing { width: 8rem; }
+.research-output-published-table.trainings-conducted-table col.cr-col-category { width: 8rem; }
+.research-output-published-table.trainings-conducted-table col.cr-col-remarks { width: 6.5rem; }
+.research-output-published-table.trainings-conducted-table col.rop-col-actions { width: 5.75rem; }
+
+.research-output-published-table {
+    font-size: 0.8rem;
+}
+
+.research-output-published-table th,
+.research-output-published-table td {
+    vertical-align: top;
+}
+
+.research-output-published-table.trainings-conducted-table th,
+.research-output-published-table.trainings-conducted-table td {
+    min-width: 0;
+}
+
+.research-output-published-table input,
+.research-output-published-table textarea {
+    width: 100%;
+}
+
+.research-output-published-table.trainings-conducted-table input,
+.research-output-published-table.trainings-conducted-table textarea {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.research-output-published-table td .proposal-textarea-compact {
+    min-height: 3.75rem;
+    resize: vertical;
+}
+
+.research-output-presented-table-wrap {
+    overflow-x: auto;
+}
+
+.research-output-presented-table.trainings-conducted-table col.ropr-col-title { width: 11rem; }
+.research-output-presented-table.trainings-conducted-table col.ropr-col-date { width: 8.25rem; }
+.research-output-presented-table.trainings-conducted-table col.ropr-col-duration { width: 4.75rem; }
+.research-output-presented-table.trainings-conducted-table col.ropr-col-researchers { width: 9rem; }
+.research-output-presented-table.trainings-conducted-table col.ropr-col-paper { width: 11rem; }
+.research-output-presented-table.trainings-conducted-table col.ropr-col-presenter { width: 8rem; }
+.research-output-presented-table.trainings-conducted-table col.ropr-col-conference { width: 11rem; }
+.research-output-presented-table.trainings-conducted-table col.ropr-col-venue { width: 7rem; }
+.research-output-presented-table.trainings-conducted-table col.ropr-col-organizer { width: 8rem; }
+.research-output-presented-table.trainings-conducted-table col.ropr-col-conf-type { width: 6.5rem; }
+.research-output-presented-table.trainings-conducted-table col.ropr-col-pres-type { width: 6.5rem; }
+.research-output-presented-table.trainings-conducted-table col.ropr-col-award { width: 8rem; }
+.research-output-presented-table.trainings-conducted-table col.ropr-col-college { width: 8rem; }
+.research-output-presented-table.trainings-conducted-table col.ropr-col-campus { width: 6.5rem; }
+.research-output-presented-table.trainings-conducted-table col.ropr-col-drive-link { width: 10rem; }
+.research-output-presented-table.trainings-conducted-table col.ropr-col-actions { width: 5.75rem; }
+.research-output-presented-table.trainings-conducted-table .ropr-col-drive-link-cell {
+    min-width: 10rem;
+}
+.research-output-presented-table.trainings-conducted-table .ropr-col-drive-link-cell input[type="url"] {
+    min-width: 9rem;
+}
+
+.research-output-presented-table {
+    font-size: 0.8rem;
+}
+
+.research-output-presented-table th,
+.research-output-presented-table td {
+    vertical-align: top;
+}
+
+.research-output-presented-table.trainings-conducted-table th,
+.research-output-presented-table.trainings-conducted-table td {
+    min-width: 0;
+}
+
+.research-output-presented-table input,
+.research-output-presented-table textarea,
+.research-output-presented-table select {
+    width: 100%;
+}
+
+.research-output-presented-table.trainings-conducted-table input,
+.research-output-presented-table.trainings-conducted-table textarea,
+.research-output-presented-table.trainings-conducted-table select {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.research-output-presented-table td .proposal-textarea-compact {
+    min-height: 3.75rem;
+    resize: vertical;
+}
+
+.commercialized-table-wrap {
+    overflow-x: auto;
+}
+
+.commercialized-table.trainings-conducted-table col.comm-col-title { width: 11rem; }
+.commercialized-table.trainings-conducted-table col.comm-col-researchers { width: 9rem; }
+.commercialized-table.trainings-conducted-table col.comm-col-date { width: 8.25rem; }
+.commercialized-table.trainings-conducted-table col.comm-col-product { width: 12rem; }
+.commercialized-table.trainings-conducted-table col.comm-col-adopter { width: 11rem; }
+.commercialized-table.trainings-conducted-table col.comm-col-college { width: 8rem; }
+.commercialized-table.trainings-conducted-table col.comm-col-campus { width: 6.5rem; }
+.commercialized-table.trainings-conducted-table col.comm-col-drive-link { width: 10rem; }
+.commercialized-table.trainings-conducted-table col.comm-col-actions { width: 5.75rem; }
+
+.commercialized-table.trainings-conducted-table .comm-col-drive-link-cell input[type="url"] {
+    min-width: 9rem;
+}
+
+.commercialized-table {
+    font-size: 0.8rem;
+}
+
+.commercialized-table th,
+.commercialized-table td {
+    vertical-align: top;
+    min-width: 0;
+}
+
+.commercialized-table input,
+.commercialized-table textarea {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.commercialized-table td input[type="date"] {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.15rem;
+}
+
+.commercialized-table td .proposal-textarea-compact {
+    min-height: 3.75rem;
+    resize: vertical;
+}
+
+.commercialized-table .completed-researches-actions-col .btn {
+    font-size: 0.68rem;
+    padding: 0.2rem 0.35rem;
+    line-height: 1.2;
+}
+
+/* Resulted in Extension */
+.resulted-in-extension-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.resulted-in-extension-table.trainings-conducted-table col.riext-col-title { width: 11rem; }
+.resulted-in-extension-table.trainings-conducted-table col.riext-col-researchers { width: 9rem; }
+.resulted-in-extension-table.trainings-conducted-table col.riext-col-date { width: 8.25rem; }
+.resulted-in-extension-table.trainings-conducted-table col.riext-col-extension { width: 11rem; }
+.resulted-in-extension-table.trainings-conducted-table col.riext-col-faculty { width: 9rem; }
+.resulted-in-extension-table.trainings-conducted-table col.riext-col-budget { width: 6.25rem; }
+.resulted-in-extension-table.trainings-conducted-table col.riext-col-venue { width: 7rem; }
+.resulted-in-extension-table.trainings-conducted-table col.riext-col-college { width: 8rem; }
+.resulted-in-extension-table.trainings-conducted-table col.riext-col-campus { width: 6.5rem; }
+.resulted-in-extension-table.trainings-conducted-table col.riext-col-drive-link { width: 10rem; }
+.resulted-in-extension-table.trainings-conducted-table col.riext-col-actions { width: 5.75rem; }
+.resulted-in-extension-table.trainings-conducted-table .riext-col-drive-link-cell {
+    min-width: 10rem;
+}
+.resulted-in-extension-table.trainings-conducted-table .riext-col-drive-link-cell input[type="url"] {
+    min-width: 9rem;
+}
+
+.resulted-in-extension-table {
+    font-size: 0.8rem;
+}
+
+.resulted-in-extension-table th,
+.resulted-in-extension-table td {
+    vertical-align: top;
+    min-width: 0;
+}
+
+.resulted-in-extension-table input,
+.resulted-in-extension-table textarea {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.resulted-in-extension-table td .proposal-textarea-compact {
+    min-height: 3.75rem;
+}
+
+/* Linkages */
+.linkages-table-wrap {
+    overflow-x: auto;
+}
+
+.linkages-table.trainings-conducted-table col.link-col-program { width: 12%; }
+.linkages-table.trainings-conducted-table col.link-col-partner { width: 11%; }
+.linkages-table.trainings-conducted-table col.link-col-forged { width: 9%; }
+.linkages-table.trainings-conducted-table col.link-col-institution { width: 10%; }
+.linkages-table.trainings-conducted-table col.link-col-deliverables { width: 12%; }
+.linkages-table.trainings-conducted-table col.link-col-date { width: 9%; }
+.linkages-table.trainings-conducted-table col.link-col-personnel { width: 10%; }
+.linkages-table.trainings-conducted-table col.link-col-beneficiaries { width: 10%; }
+.linkages-table.trainings-conducted-table col.link-col-drive-link { width: 10%; }
+.linkages-table.trainings-conducted-table col.link-col-actions { width: 4%; }
+.linkages-table .link-col-drive-link-cell {
+    min-width: 10rem;
+}
+.linkages-table .link-col-drive-link-cell input[type="url"] {
+    min-width: 9rem;
+}
+
+.linkages-table {
+    font-size: 0.8rem;
+}
+
+.linkages-table th,
+.linkages-table td {
+    min-width: 0;
+    vertical-align: top;
+}
+
+.linkages-table input,
+.linkages-table textarea {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.linkages-table thead th {
+    min-width: 8rem;
+}
+
+.linkages-table thead th.completed-researches-actions-col {
+    min-width: 5.5rem;
+}
+
+/* Consolidated Linkages — wide table with horizontal scroll */
+.consolidated-linkages-section .linkages-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.consolidated-linkages-section .linkages-table.trainings-conducted-table {
+    width: max-content;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+.consolidated-linkages-section .linkages-table thead th:nth-child(1),
+.consolidated-linkages-section .linkages-table tbody td:nth-child(1) { min-width: 12rem; }
+.consolidated-linkages-section .linkages-table thead th:nth-child(2),
+.consolidated-linkages-section .linkages-table tbody td:nth-child(2) { min-width: 11rem; }
+.consolidated-linkages-section .linkages-table thead th:nth-child(3),
+.consolidated-linkages-section .linkages-table tbody td:nth-child(3) { min-width: 9rem; }
+.consolidated-linkages-section .linkages-table thead th:nth-child(4),
+.consolidated-linkages-section .linkages-table tbody td:nth-child(4) { min-width: 11rem; }
+.consolidated-linkages-section .linkages-table thead th:nth-child(5),
+.consolidated-linkages-section .linkages-table tbody td:nth-child(5) { min-width: 12rem; }
+.consolidated-linkages-section .linkages-table thead th:nth-child(6),
+.consolidated-linkages-section .linkages-table tbody td:nth-child(6) { min-width: 8.25rem; }
+.consolidated-linkages-section .linkages-table thead th:nth-child(7),
+.consolidated-linkages-section .linkages-table tbody td:nth-child(7) { min-width: 8.25rem; }
+.consolidated-linkages-section .linkages-table thead th:nth-child(8),
+.consolidated-linkages-section .linkages-table tbody td:nth-child(8) { min-width: 10rem; }
+.consolidated-linkages-section .linkages-table thead th:nth-child(9),
+.consolidated-linkages-section .linkages-table tbody td:nth-child(9) { min-width: 10rem; }
+.consolidated-linkages-section .linkages-table thead th:nth-child(10),
+.consolidated-linkages-section .linkages-table tbody td:nth-child(10) { min-width: 8rem; }
+.consolidated-linkages-section .linkages-table thead th:nth-child(11),
+.consolidated-linkages-section .linkages-table tbody td:nth-child(11) { min-width: 7rem; }
+.consolidated-linkages-section .linkages-table thead th:nth-child(12),
+.consolidated-linkages-section .linkages-table tbody td:nth-child(12) { min-width: 10rem; }
+.consolidated-linkages-section .linkages-table thead th:nth-child(13),
+.consolidated-linkages-section .linkages-table tbody td:nth-child(13) { min-width: 5.75rem; }
+
+.consolidated-linkages-section .linkages-table td .proposal-textarea-compact {
+    min-height: 3.75rem;
+    resize: vertical;
+}
+
+/* Journal & Book Citation */
+.journal-citation-table-wrap,
+.book-citation-table-wrap {
+    overflow-x: auto;
+}
+
+.journal-citation-table,
+.book-citation-table {
+    font-size: 0.8rem;
+}
+
+.journal-citation-table th,
+.journal-citation-table td,
+.book-citation-table th,
+.book-citation-table td {
+    vertical-align: top;
+    min-width: 0;
+}
+
+.journal-citation-table input,
+.journal-citation-table textarea,
+.book-citation-table input,
+.book-citation-table textarea {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Consolidated Journal Citation — wide table with horizontal scroll */
+.consolidated-journal-citation-section .journal-citation-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.consolidated-journal-citation-section .journal-citation-table.trainings-conducted-table {
+    width: max-content;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+.consolidated-journal-citation-section .journal-citation-table thead th:nth-child(1),
+.consolidated-journal-citation-section .journal-citation-table tbody td:nth-child(1) { min-width: 9rem; }
+.consolidated-journal-citation-section .journal-citation-table thead th:nth-child(2),
+.consolidated-journal-citation-section .journal-citation-table tbody td:nth-child(2) { min-width: 11rem; }
+.consolidated-journal-citation-section .journal-citation-table thead th:nth-child(3),
+.consolidated-journal-citation-section .journal-citation-table tbody td:nth-child(3) { min-width: 12rem; }
+.consolidated-journal-citation-section .journal-citation-table thead th:nth-child(4),
+.consolidated-journal-citation-section .journal-citation-table tbody td:nth-child(4) { min-width: 11rem; }
+.consolidated-journal-citation-section .journal-citation-table thead th:nth-child(5),
+.consolidated-journal-citation-section .journal-citation-table tbody td:nth-child(5) { min-width: 9rem; }
+.consolidated-journal-citation-section .journal-citation-table thead th:nth-child(6),
+.consolidated-journal-citation-section .journal-citation-table tbody td:nth-child(6) { min-width: 12rem; }
+.consolidated-journal-citation-section .journal-citation-table thead th:nth-child(7),
+.consolidated-journal-citation-section .journal-citation-table tbody td:nth-child(7) { min-width: 5.5rem; }
+.consolidated-journal-citation-section .journal-citation-table thead th:nth-child(8),
+.consolidated-journal-citation-section .journal-citation-table tbody td:nth-child(8) { min-width: 5.5rem; }
+.consolidated-journal-citation-section .journal-citation-table thead th:nth-child(9),
+.consolidated-journal-citation-section .journal-citation-table tbody td:nth-child(9) { min-width: 5.5rem; }
+.consolidated-journal-citation-section .journal-citation-table thead th:nth-child(10),
+.consolidated-journal-citation-section .journal-citation-table tbody td:nth-child(10) { min-width: 8rem; }
+.consolidated-journal-citation-section .journal-citation-table thead th:nth-child(11),
+.consolidated-journal-citation-section .journal-citation-table tbody td:nth-child(11) { min-width: 7rem; }
+.consolidated-journal-citation-section .journal-citation-table thead th:nth-child(12),
+.consolidated-journal-citation-section .journal-citation-table tbody td:nth-child(12) { min-width: 6.5rem; }
+.consolidated-journal-citation-section .journal-citation-table thead th:nth-child(13),
+.consolidated-journal-citation-section .journal-citation-table tbody td:nth-child(13) { min-width: 10rem; }
+.consolidated-journal-citation-section .journal-citation-table thead th:nth-child(14),
+.consolidated-journal-citation-section .journal-citation-table tbody td:nth-child(14) { min-width: 5.75rem; }
+
+.journal-citation-table .jc-col-drive-link-cell {
+    min-width: 10rem;
+}
+.journal-citation-table .jc-col-drive-link-cell input[type="url"] {
+    min-width: 9rem;
+}
+
+.consolidated-journal-citation-section .journal-citation-table td .proposal-textarea-compact {
+    min-height: 3.75rem;
+    resize: vertical;
+}
+
+/* Consolidated Book Citation — wide table with horizontal scroll */
+.consolidated-book-citation-section .book-citation-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.consolidated-book-citation-section .book-citation-table.trainings-conducted-table {
+    width: max-content;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+.consolidated-book-citation-section .book-citation-table thead th:nth-child(1),
+.consolidated-book-citation-section .book-citation-table tbody td:nth-child(1) { min-width: 12rem; }
+.consolidated-book-citation-section .book-citation-table thead th:nth-child(2),
+.consolidated-book-citation-section .book-citation-table tbody td:nth-child(2) { min-width: 11rem; }
+.consolidated-book-citation-section .book-citation-table thead th:nth-child(3),
+.consolidated-book-citation-section .book-citation-table tbody td:nth-child(3) { min-width: 12rem; }
+.consolidated-book-citation-section .book-citation-table thead th:nth-child(4),
+.consolidated-book-citation-section .book-citation-table tbody td:nth-child(4) { min-width: 12rem; }
+.consolidated-book-citation-section .book-citation-table thead th:nth-child(5),
+.consolidated-book-citation-section .book-citation-table tbody td:nth-child(5) { min-width: 11rem; }
+.consolidated-book-citation-section .book-citation-table thead th:nth-child(6),
+.consolidated-book-citation-section .book-citation-table tbody td:nth-child(6) { min-width: 12rem; }
+.consolidated-book-citation-section .book-citation-table thead th:nth-child(7),
+.consolidated-book-citation-section .book-citation-table tbody td:nth-child(7) { min-width: 5.5rem; }
+.consolidated-book-citation-section .book-citation-table thead th:nth-child(8),
+.consolidated-book-citation-section .book-citation-table tbody td:nth-child(8) { min-width: 5.5rem; }
+.consolidated-book-citation-section .book-citation-table thead th:nth-child(9),
+.consolidated-book-citation-section .book-citation-table tbody td:nth-child(9) { min-width: 5.5rem; }
+.consolidated-book-citation-section .book-citation-table thead th:nth-child(10),
+.consolidated-book-citation-section .book-citation-table tbody td:nth-child(10) { min-width: 8rem; }
+.consolidated-book-citation-section .book-citation-table thead th:nth-child(11),
+.consolidated-book-citation-section .book-citation-table tbody td:nth-child(11) { min-width: 8rem; }
+.consolidated-book-citation-section .book-citation-table thead th:nth-child(12),
+.consolidated-book-citation-section .book-citation-table tbody td:nth-child(12) { min-width: 7rem; }
+.consolidated-book-citation-section .book-citation-table thead th:nth-child(13),
+.consolidated-book-citation-section .book-citation-table tbody td:nth-child(13) { min-width: 5.75rem; }
+.consolidated-book-citation-section .book-citation-table thead th:nth-child(14),
+.consolidated-book-citation-section .book-citation-table tbody td:nth-child(14) { min-width: 10rem; }
+.consolidated-book-citation-section .book-citation-table thead th:nth-child(15),
+.consolidated-book-citation-section .book-citation-table tbody td:nth-child(15) { min-width: 5.75rem; }
+
+.book-citation-table .bc-col-drive-link-cell {
+    min-width: 10rem;
+}
+.book-citation-table .bc-col-drive-link-cell input[type="url"] {
+    min-width: 9rem;
+}
+
+.consolidated-book-citation-section .book-citation-table td .proposal-textarea-compact {
+    min-height: 3.75rem;
+    resize: vertical;
+}
+
+/* Inventions, UM, Copyrights — wide table with horizontal scroll */
+.inventions-um-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.inventions-um-table.trainings-conducted-table {
+    width: max-content;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+.inventions-um-table.trainings-conducted-table thead th:nth-child(1),
+.inventions-um-table.trainings-conducted-table tbody td:nth-child(1) { min-width: 13rem; }
+.inventions-um-table.trainings-conducted-table thead th:nth-child(2),
+.inventions-um-table.trainings-conducted-table tbody td:nth-child(2) { min-width: 8.5rem; }
+.inventions-um-table.trainings-conducted-table thead th:nth-child(3),
+.inventions-um-table.trainings-conducted-table tbody td:nth-child(3) { min-width: 9rem; }
+.inventions-um-table.trainings-conducted-table thead th:nth-child(4),
+.inventions-um-table.trainings-conducted-table tbody td:nth-child(4) { min-width: 11rem; }
+.inventions-um-table.trainings-conducted-table thead th:nth-child(5),
+.inventions-um-table.trainings-conducted-table tbody td:nth-child(5) { min-width: 11rem; }
+.inventions-um-table.trainings-conducted-table thead th:nth-child(6),
+.inventions-um-table.trainings-conducted-table tbody td:nth-child(6) { min-width: 9rem; }
+.inventions-um-table.trainings-conducted-table thead th:nth-child(7),
+.inventions-um-table.trainings-conducted-table tbody td:nth-child(7) { min-width: 12rem; }
+.inventions-um-table.trainings-conducted-table thead th:nth-child(8),
+.inventions-um-table.trainings-conducted-table tbody td:nth-child(8) { min-width: 12rem; }
+.inventions-um-table.trainings-conducted-table thead th:nth-child(9),
+.inventions-um-table.trainings-conducted-table tbody td:nth-child(9) { min-width: 8rem; }
+.inventions-um-table.trainings-conducted-table thead th:nth-child(10),
+.inventions-um-table.trainings-conducted-table tbody td:nth-child(10) { min-width: 7rem; }
+.inventions-um-table.trainings-conducted-table thead th:nth-child(11),
+.inventions-um-table.trainings-conducted-table tbody td:nth-child(11) { min-width: 5.75rem; }
+
+.inventions-um-paper:not(.consolidated-inventions-um-copyrights-paper) .inventions-um-table.trainings-conducted-table thead th:nth-child(9),
+.inventions-um-paper:not(.consolidated-inventions-um-copyrights-paper) .inventions-um-table.trainings-conducted-table tbody td:nth-child(9) { min-width: 10rem; }
+.inventions-um-paper:not(.consolidated-inventions-um-copyrights-paper) .inventions-um-table.trainings-conducted-table thead th:nth-child(10),
+.inventions-um-paper:not(.consolidated-inventions-um-copyrights-paper) .inventions-um-table.trainings-conducted-table tbody td:nth-child(10) { min-width: 5.75rem; }
+
+.consolidated-inventions-um-copyrights-section .inventions-um-table.trainings-conducted-table thead th:nth-child(11),
+.consolidated-inventions-um-copyrights-section .inventions-um-table.trainings-conducted-table tbody td:nth-child(11) { min-width: 10rem; }
+.consolidated-inventions-um-copyrights-section .inventions-um-table.trainings-conducted-table thead th:nth-child(12),
+.consolidated-inventions-um-copyrights-section .inventions-um-table.trainings-conducted-table tbody td:nth-child(12) { min-width: 5.75rem; }
+
+.inventions-um-table .ium-col-drive-link-cell {
+    min-width: 10rem;
+}
+.inventions-um-table .ium-col-drive-link-cell input[type="url"] {
+    min-width: 9rem;
+}
+
+.inventions-um-table.trainings-conducted-table input,
+.inventions-um-table.trainings-conducted-table textarea,
+.inventions-um-table.trainings-conducted-table select {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.inventions-um-table td .proposal-textarea-compact {
+    min-height: 3.75rem;
+    resize: vertical;
+}
+
+/* OBR Matrix — wide table with horizontal scroll */
+.obr-matrix-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.obr-matrix-table.trainings-conducted-table {
+    width: max-content;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+.obr-matrix-table.trainings-conducted-table col.obr-col-thrust { width: 12rem; }
+.obr-matrix-table.trainings-conducted-table col.obr-col-area { width: 10rem; }
+.obr-matrix-table.trainings-conducted-table col.obr-col-title { width: 14rem; }
+.obr-matrix-table.trainings-conducted-table col.obr-col-results { width: 14rem; }
+.obr-matrix-table.trainings-conducted-table col.obr-col-extension { width: 14rem; }
+.obr-matrix-table.trainings-conducted-table col.obr-col-outcomes { width: 12rem; }
+.obr-matrix-table.trainings-conducted-table col.obr-col-sixps { width: 5rem; }
+.obr-matrix-table.trainings-conducted-table col.obr-col-actions { width: 5.75rem; }
+
+.obr-matrix-table.trainings-conducted-table thead th:nth-child(1),
+.obr-matrix-table.trainings-conducted-table tbody td:nth-child(1) { min-width: 12rem; }
+.obr-matrix-table.trainings-conducted-table thead th:nth-child(2),
+.obr-matrix-table.trainings-conducted-table tbody td:nth-child(2) { min-width: 12rem; }
+.obr-matrix-table.trainings-conducted-table thead th:nth-child(3),
+.obr-matrix-table.trainings-conducted-table tbody td:nth-child(3) { min-width: 10rem; }
+.obr-matrix-table.trainings-conducted-table thead th:nth-child(4),
+.obr-matrix-table.trainings-conducted-table tbody td:nth-child(4) { min-width: 14rem; }
+.obr-matrix-table.trainings-conducted-table thead th:nth-child(5),
+.obr-matrix-table.trainings-conducted-table tbody td:nth-child(5) { min-width: 14rem; }
+.obr-matrix-table.trainings-conducted-table thead th:nth-child(6),
+.obr-matrix-table.trainings-conducted-table tbody td:nth-child(6) { min-width: 14rem; }
+.obr-matrix-table.trainings-conducted-table thead th:nth-child(7),
+.obr-matrix-table.trainings-conducted-table tbody td:nth-child(7) { min-width: 12rem; }
+.obr-matrix-table.trainings-conducted-table thead th:nth-child(8),
+.obr-matrix-table.trainings-conducted-table tbody td:nth-child(8) { min-width: 5rem; }
+.obr-matrix-table.trainings-conducted-table thead th:nth-child(9),
+.obr-matrix-table.trainings-conducted-table tbody td:nth-child(9) { min-width: 5.75rem; }
+
+.obr-matrix-table.trainings-conducted-table input,
+.obr-matrix-table.trainings-conducted-table textarea,
+.obr-matrix-table.trainings-conducted-table select {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.obr-matrix-table td .proposal-textarea-compact {
+    min-height: 3.75rem;
+    resize: vertical;
+}
+
+.obr-matrix-table {
+    font-size: 0.8rem;
+}
+
+.terminal-assessment-table.trainings-conducted-table col.ta-col-no { width: 6%; }
+.terminal-assessment-table.trainings-conducted-table col.ta-col-parameter { width: 64%; }
+.terminal-assessment-table.trainings-conducted-table col.ta-col-score { width: 10%; }
+
+.terminal-assessment-table .terminal-assessment-score {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.terminal-assessment-table .terminal-assessment-score input {
+    width: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+.terminal-assessment-judgment {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.proposal-signature-section {
+    margin-top: 2rem;
+}
+
+.proposal-signature-copy {
+    margin: 0;
+    line-height: 1.35;
+}
+
+.proposal-signature-grid,
+.proposal-signature-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 2rem;
+}
+
+.proposal-signature-grid {
+    margin-top: 2rem;
+}
+
+.proposal-signature-fields {
+    margin-top: 1rem;
+}
+
+.proposal-signature-slot {
+    text-align: center;
+}
+
+.proposal-signature-line {
+    min-height: 1.5rem;
+    border-bottom: 1px solid #111;
+}
+
+.proposal-signature-date {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    font-size: 0.95rem;
+}
+
+.proposal-signature-image-wrap {
+    min-height: 3rem;
+    margin-bottom: 0.15rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.proposal-signature-image-wrap--empty {
+    min-height: 3rem;
+}
+
+.proposal-signature-name {
+    margin-top: 0.35rem;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    min-height: 1.35rem;
+}
+
+.proposal-signature-image,
+.profile-signature-image {
+    max-height: 3.5rem;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.profile-signature-preview {
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px dashed var(--border);
+    background: #fafafa;
+    text-align: center;
+}
+
+.profile-signature-empty {
+    margin: 1rem 0;
+    color: var(--muted);
+}
+
+.profile-signature-form {
+    margin-top: 1rem;
+}
+
+.profile-signature-remove {
+    margin-top: 0.75rem;
+}
+
+.profile-avatar-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin: 1.25rem 0 1.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.profile-avatar-image,
+.profile-avatar-fallback {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.profile-avatar-image {
+    object-fit: cover;
+    border: 1px solid var(--border);
+    background: #fafafa;
+}
+
+.profile-avatar-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.75rem;
+}
+
+.profile-avatar-actions {
+    flex: 1;
+    min-width: 0;
+}
+
+.profile-avatar-hint {
+    margin: 0.35rem 0 0;
+    font-size: 0.85rem;
+}
+
+.profile-avatar-form .actions {
+    margin-top: 0.75rem;
+}
+
+.profile-avatar-remove {
+    margin-top: 0.75rem;
+}
+
+.profile-account-form label,
+.profile-password-form label {
+    display: block;
+    margin-top: 0.85rem;
+}
+
+.profile-account-form label:first-of-type,
+.profile-password-form label:first-of-type {
+    margin-top: 0;
+}
+
+@media (max-width: 640px) {
+    .profile-avatar-block {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+.proposal-signature-label {
+    margin-top: 0.15rem;
+}
+
+.proposal-detail-stack {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.proposal-detail-stack h3 {
+    margin: 0 0 0.35rem;
+}
+
+.proposal-detail-stack p {
+    margin: 0;
+}
+
+.proposal-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.proposal-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: #f9fafb;
+    font-size: 0.85rem;
+}
+
+.proposal-empty-state {
+    display: grid;
+    gap: 0.75rem;
+    justify-items: start;
+}
+
+.proposal-list-title {
+    font-weight: 600;
+}
+
+.proposal-review-form {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.proposal-review-form input {
+    min-width: 260px;
+    margin: 0;
+}
+
+.proposal-history-paper {
+    margin-top: 1rem;
+}
+
+.proposal-history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.proposal-history-list li {
+    border-left: 3px solid #111;
+    padding: 0.7rem 0.85rem;
+    background: #fafafa;
+}
+
+.proposal-history-meta {
+    margin-bottom: 0.35rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+/* Viewport-fit: proposal entry tables on desktop (Windows) */
+@media (min-width: 900px) {
+    .trainings-conducted-paper .trainings-conducted-scroll-hint {
+        display: none;
+    }
+
+    .trainings-conducted-paper .trainings-conducted-table-wrap {
+        overflow-x: visible;
+    }
+
+    .trainings-conducted-paper .trainings-conducted-table {
+        width: 100%;
+        max-width: 100%;
+        table-layout: fixed;
+        min-width: 0;
+    }
+
+    .trainings-conducted-paper .trainings-conducted-table th,
+    .trainings-conducted-paper .trainings-conducted-table td {
+        min-width: 0;
+    }
+
+    .trainings-conducted-paper .trainings-conducted-table input,
+    .trainings-conducted-paper .trainings-conducted-table textarea,
+    .trainings-conducted-paper .trainings-conducted-table select {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .trainings-conducted-paper .trainings-conducted-table td input[type="date"] {
+        font-size: 0.72rem;
+        padding: 0.25rem 0.15rem;
+    }
+
+    .trainings-conducted-paper .trainings-conducted-table td .proposal-textarea-compact {
+        min-height: 2.25rem;
+    }
+
+    .trainings-conducted-paper .research-output-presented-section .trainings-conducted-scroll-hint,
+    .trainings-conducted-paper .consolidated-research-output-presented-section .trainings-conducted-scroll-hint {
+        display: block;
+    }
+
+    .trainings-conducted-paper .research-output-presented-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .trainings-conducted-paper .research-output-presented-table.trainings-conducted-table {
+        width: max-content;
+        min-width: 100%;
+        max-width: none;
+        table-layout: auto;
+    }
+
+    .trainings-conducted-paper .research-output-presented-table.trainings-conducted-table th,
+    .trainings-conducted-paper .research-output-presented-table.trainings-conducted-table td {
+        min-width: 0;
+    }
+
+    .trainings-conducted-paper .research-output-published-section .trainings-conducted-scroll-hint {
+        display: block;
+    }
+
+    .trainings-conducted-paper .research-output-published-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .trainings-conducted-paper .research-output-published-table.trainings-conducted-table {
+        width: max-content;
+        min-width: 100%;
+        max-width: none;
+        table-layout: auto;
+    }
+
+    .trainings-conducted-paper .research-output-published-table.trainings-conducted-table th,
+    .trainings-conducted-paper .research-output-published-table.trainings-conducted-table td {
+        min-width: 0;
+    }
+
+    .trainings-conducted-paper .research-output-published-table td .proposal-textarea-compact {
+        min-height: 3.75rem;
+    }
+
+    .trainings-conducted-paper .commercialized-section .trainings-conducted-scroll-hint,
+    .trainings-conducted-paper .consolidated-commercialized-section .trainings-conducted-scroll-hint {
+        display: block;
+    }
+
+    .trainings-conducted-paper .commercialized-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .trainings-conducted-paper .commercialized-table.trainings-conducted-table {
+        width: max-content;
+        min-width: 100%;
+        max-width: none;
+        table-layout: auto;
+    }
+
+    .trainings-conducted-paper .commercialized-table td .proposal-textarea-compact {
+        min-height: 3.75rem;
+    }
+
+    .trainings-conducted-paper.completed-researches-paper .completed-researches-section .trainings-conducted-scroll-hint,
+    .trainings-conducted-paper.consolidated-completed-researches-paper .completed-researches-section .trainings-conducted-scroll-hint,
+    .trainings-conducted-paper.consolidated-ongoing-researches-paper .completed-researches-section .trainings-conducted-scroll-hint {
+        display: block;
+    }
+
+    .trainings-conducted-paper.completed-researches-paper .completed-researches-section .trainings-conducted-table-wrap,
+    .trainings-conducted-paper.consolidated-completed-researches-paper .completed-researches-section .trainings-conducted-table-wrap,
+    .trainings-conducted-paper.consolidated-ongoing-researches-paper .completed-researches-section .trainings-conducted-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .trainings-conducted-paper.completed-researches-paper .completed-researches-table.trainings-conducted-table,
+    .trainings-conducted-paper.consolidated-completed-researches-paper .completed-researches-table.trainings-conducted-table,
+    .trainings-conducted-paper.consolidated-ongoing-researches-paper .completed-researches-table.trainings-conducted-table {
+        width: max-content;
+        min-width: 100%;
+        max-width: none;
+        table-layout: auto;
+    }
+
+    .trainings-conducted-paper.completed-researches-paper .completed-researches-table.trainings-conducted-table th,
+    .trainings-conducted-paper.completed-researches-paper .completed-researches-table.trainings-conducted-table td,
+    .trainings-conducted-paper.consolidated-completed-researches-paper .completed-researches-table.trainings-conducted-table th,
+    .trainings-conducted-paper.consolidated-completed-researches-paper .completed-researches-table.trainings-conducted-table td,
+    .trainings-conducted-paper.consolidated-ongoing-researches-paper .completed-researches-table.trainings-conducted-table th,
+    .trainings-conducted-paper.consolidated-ongoing-researches-paper .completed-researches-table.trainings-conducted-table td {
+        min-width: 0;
+    }
+
+    .trainings-conducted-paper.completed-researches-paper .completed-researches-table td .proposal-textarea-compact {
+        min-height: 3.75rem;
+    }
+
+    .trainings-conducted-paper .resulted-in-extension-section .trainings-conducted-scroll-hint,
+    .trainings-conducted-paper .consolidated-resulted-in-extension-section .trainings-conducted-scroll-hint {
+        display: block;
+    }
+
+    .trainings-conducted-paper .resulted-in-extension-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .trainings-conducted-paper .resulted-in-extension-table.trainings-conducted-table {
+        width: max-content;
+        min-width: 100%;
+        max-width: none;
+        table-layout: auto;
+    }
+
+    .trainings-conducted-paper .resulted-in-extension-table td .proposal-textarea-compact {
+        min-height: 3.75rem;
+    }
+
+    .trainings-conducted-paper .research-output-presented-table td .proposal-textarea-compact {
+        min-height: 3.75rem;
+    }
+
+    .trainings-conducted-paper .trainings-conducted-section:has(.inventions-um-table-wrap) .trainings-conducted-scroll-hint,
+    .trainings-conducted-paper .consolidated-inventions-um-copyrights-section .trainings-conducted-scroll-hint {
+        display: block;
+    }
+
+    .trainings-conducted-paper .inventions-um-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .trainings-conducted-paper .inventions-um-table.trainings-conducted-table {
+        width: max-content;
+        min-width: 100%;
+        max-width: none;
+        table-layout: auto;
+    }
+
+    .trainings-conducted-paper .inventions-um-table td .proposal-textarea-compact {
+        min-height: 3.75rem;
+    }
+
+    .trainings-conducted-paper .obr-matrix-section .trainings-conducted-scroll-hint {
+        display: block;
+    }
+
+    .trainings-conducted-paper .obr-matrix-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .trainings-conducted-paper .obr-matrix-table.trainings-conducted-table {
+        width: max-content;
+        min-width: 100%;
+        max-width: none;
+        table-layout: auto;
+    }
+
+    .trainings-conducted-paper .obr-matrix-table td .proposal-textarea-compact {
+        min-height: 3.75rem;
+    }
+
+    .trainings-conducted-paper .completed-researches-actions-col .btn,
+    .trainings-conducted-paper .proposal-coauthors-action-col .btn {
+        font-size: 0.68rem;
+        padding: 0.2rem 0.35rem;
+        line-height: 1.2;
+    }
+
+    .trainings-conducted-paper .completed-researches-title {
+        font-size: 1.05rem;
+        line-height: 1.3;
+        letter-spacing: 0.02em;
+    }
+
+    .trainings-conducted-paper .proposal-plan-table {
+        min-width: 0;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .trainings-conducted-paper .proposal-plan-table .proposal-plan-activity {
+        width: 26%;
+    }
+
+    .trainings-conducted-paper .proposal-plan-month {
+        width: 6.15%;
+        font-size: 0.68rem;
+        padding: 0.25rem 0.1rem;
+    }
+
+    .trainings-conducted-paper .proposal-coauthors-wrap .trainings-conducted-scroll-hint {
+        display: block;
+    }
+
+    .trainings-conducted-paper .proposal-coauthors-wrap .trainings-conducted-table-wrap {
+        overflow-x: auto;
+    }
+
+    .trainings-conducted-paper .proposal-coauthors-table.trainings-conducted-table {
+        width: max-content;
+        min-width: 100%;
+        max-width: none;
+        table-layout: auto;
+    }
+
+    .trainings-conducted-paper .proposal-coauthors-table thead th:nth-child(1),
+    .trainings-conducted-paper .proposal-coauthors-table thead th:nth-child(2),
+    .trainings-conducted-paper .proposal-coauthors-table thead th:nth-child(3),
+    .trainings-conducted-paper .proposal-coauthors-table thead th:nth-child(4) {
+        width: auto;
+        min-width: 11rem;
+    }
+
+    .trainings-conducted-paper .proposal-coauthors-table textarea.proposal-coauthor-field {
+        min-height: 3.5rem;
+        min-width: 11rem;
+    }
+
+    .trainings-conducted-paper .proposal-coauthors-action-col {
+        width: 7.5rem;
+    }
+
+    .trainings-conducted-paper .journal-citation-table thead th:nth-child(1),
+    .trainings-conducted-paper .journal-citation-table thead th:nth-child(2),
+    .trainings-conducted-paper .journal-citation-table thead th:nth-child(3),
+    .trainings-conducted-paper .journal-citation-table thead th:nth-child(4),
+    .trainings-conducted-paper .journal-citation-table thead th:nth-child(5),
+    .trainings-conducted-paper .journal-citation-table thead th:nth-child(6) {
+        width: 10%;
+    }
+
+    .trainings-conducted-paper .journal-citation-table thead th:nth-child(7),
+    .trainings-conducted-paper .journal-citation-table thead th:nth-child(8),
+    .trainings-conducted-paper .journal-citation-table thead th:nth-child(9) {
+        width: 6%;
+    }
+
+    .trainings-conducted-paper .journal-citation-table thead th:nth-child(10) {
+        width: 8%;
+    }
+
+    .trainings-conducted-paper .journal-citation-table thead th:nth-child(11) {
+        width: 5%;
+    }
+
+    .trainings-conducted-paper .linkages-section .trainings-conducted-scroll-hint {
+        display: block;
+    }
+
+    .trainings-conducted-paper .linkages-table-wrap {
+        overflow-x: auto;
+    }
+
+    .trainings-conducted-paper .linkages-table {
+        table-layout: auto;
+        min-width: 54rem;
+        width: max-content;
+    }
+
+    .trainings-conducted-paper .consolidated-linkages-section .linkages-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .trainings-conducted-paper .consolidated-linkages-section .linkages-table {
+        width: max-content;
+        min-width: 100%;
+        max-width: none;
+        table-layout: auto;
+    }
+
+    .trainings-conducted-paper .book-citation-table thead th:nth-child(1),
+    .trainings-conducted-paper .book-citation-table thead th:nth-child(2),
+    .trainings-conducted-paper .book-citation-table thead th:nth-child(3),
+    .trainings-conducted-paper .book-citation-table thead th:nth-child(4),
+    .trainings-conducted-paper .book-citation-table thead th:nth-child(5),
+    .trainings-conducted-paper .book-citation-table thead th:nth-child(6) {
+        width: 9%;
+    }
+
+    .trainings-conducted-paper .book-citation-table thead th:nth-child(7),
+    .trainings-conducted-paper .book-citation-table thead th:nth-child(8),
+    .trainings-conducted-paper .book-citation-table thead th:nth-child(9),
+    .trainings-conducted-paper .book-citation-table thead th:nth-child(10) {
+        width: 5%;
+    }
+
+    .trainings-conducted-paper .book-citation-table thead th:nth-child(11) {
+        width: 7%;
+    }
+
+    .trainings-conducted-paper .book-citation-table thead th:nth-child(12) {
+        width: 5%;
+    }
+
+    .trainings-conducted-paper .consolidated-journal-citation-section .trainings-conducted-scroll-hint {
+        display: block;
+    }
+
+    .trainings-conducted-paper .consolidated-journal-citation-section .journal-citation-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .trainings-conducted-paper .consolidated-journal-citation-section .journal-citation-table.trainings-conducted-table {
+        width: max-content;
+        min-width: 100%;
+        max-width: none;
+        table-layout: auto;
+    }
+
+    .trainings-conducted-paper .consolidated-journal-citation-section .journal-citation-table thead th:nth-child(1),
+    .trainings-conducted-paper .consolidated-journal-citation-section .journal-citation-table thead th:nth-child(2),
+    .trainings-conducted-paper .consolidated-journal-citation-section .journal-citation-table thead th:nth-child(3),
+    .trainings-conducted-paper .consolidated-journal-citation-section .journal-citation-table thead th:nth-child(4),
+    .trainings-conducted-paper .consolidated-journal-citation-section .journal-citation-table thead th:nth-child(5),
+    .trainings-conducted-paper .consolidated-journal-citation-section .journal-citation-table thead th:nth-child(6) {
+        width: auto;
+    }
+
+    .trainings-conducted-paper .consolidated-journal-citation-section .journal-citation-table thead th:nth-child(7),
+    .trainings-conducted-paper .consolidated-journal-citation-section .journal-citation-table thead th:nth-child(8),
+    .trainings-conducted-paper .consolidated-journal-citation-section .journal-citation-table thead th:nth-child(9),
+    .trainings-conducted-paper .consolidated-journal-citation-section .journal-citation-table thead th:nth-child(10),
+    .trainings-conducted-paper .consolidated-journal-citation-section .journal-citation-table thead th:nth-child(11),
+    .trainings-conducted-paper .consolidated-journal-citation-section .journal-citation-table thead th:nth-child(12),
+    .trainings-conducted-paper .consolidated-journal-citation-section .journal-citation-table thead th:nth-child(13) {
+        width: auto;
+    }
+
+    .trainings-conducted-paper .consolidated-book-citation-section .trainings-conducted-scroll-hint {
+        display: block;
+    }
+
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table.trainings-conducted-table {
+        width: max-content;
+        min-width: 100%;
+        max-width: none;
+        table-layout: auto;
+    }
+
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table thead th:nth-child(1),
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table thead th:nth-child(2),
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table thead th:nth-child(3),
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table thead th:nth-child(4),
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table thead th:nth-child(5),
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table thead th:nth-child(6) {
+        width: auto;
+    }
+
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table thead th:nth-child(7),
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table thead th:nth-child(8),
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table thead th:nth-child(9),
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table thead th:nth-child(10),
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table thead th:nth-child(11),
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table thead th:nth-child(12),
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table thead th:nth-child(13),
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table thead th:nth-child(14),
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table thead th:nth-child(15) {
+        width: auto;
+    }
+
+    .trainings-conducted-paper.terminal-report-paper .trainings-conducted-section .trainings-conducted-scroll-hint,
+    .trainings-conducted-paper.progress-report-paper .trainings-conducted-section .trainings-conducted-scroll-hint {
+        display: block;
+    }
+
+    .trainings-conducted-paper.terminal-report-paper .trainings-conducted-section .trainings-conducted-table-wrap,
+    .trainings-conducted-paper.progress-report-paper .trainings-conducted-section .trainings-conducted-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .trainings-conducted-paper.terminal-report-paper .trainings-conducted-table,
+    .trainings-conducted-paper.progress-report-paper .trainings-conducted-table {
+        width: max-content;
+        min-width: 100%;
+        max-width: none;
+        table-layout: auto;
+    }
+
+    .trainings-conducted-paper.terminal-report-paper .trainings-conducted-table th,
+    .trainings-conducted-paper.terminal-report-paper .trainings-conducted-table td,
+    .trainings-conducted-paper.progress-report-paper .trainings-conducted-table th,
+    .trainings-conducted-paper.progress-report-paper .trainings-conducted-table td {
+        min-width: 0;
+    }
+
+    .trainings-conducted-paper.terminal-report-paper .trainings-conducted-table td .proposal-textarea-compact,
+    .trainings-conducted-paper.progress-report-paper .trainings-conducted-table td .proposal-textarea-compact {
+        min-height: 3.75rem;
+        min-width: 100%;
+    }
+
+    /* Work entries: rem mins so the table overflows and scrolls (not crushed % widths) */
+    .progress-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) thead th:nth-child(1),
+    .progress-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) tbody td:nth-child(1),
+    .terminal-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) thead th:nth-child(1),
+    .terminal-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) tbody td:nth-child(1),
+    .progress-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) thead th:nth-child(2),
+    .progress-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) tbody td:nth-child(2),
+    .terminal-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) thead th:nth-child(2),
+    .terminal-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) tbody td:nth-child(2),
+    .progress-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) thead th:nth-child(3),
+    .progress-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) tbody td:nth-child(3),
+    .terminal-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) thead th:nth-child(3),
+    .terminal-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) tbody td:nth-child(3) {
+        width: 14rem;
+        min-width: 14rem;
+    }
+
+    .progress-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) thead th:nth-child(4),
+    .progress-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) tbody td:nth-child(4),
+    .terminal-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) thead th:nth-child(4),
+    .terminal-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) tbody td:nth-child(4) {
+        width: 16rem;
+        min-width: 16rem;
+    }
+
+    .progress-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) thead th:nth-child(5),
+    .progress-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) tbody td:nth-child(5),
+    .terminal-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) thead th:nth-child(5),
+    .terminal-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) tbody td:nth-child(5) {
+        width: 5.75rem;
+        min-width: 5.75rem;
+    }
+
+    .terminal-report-paper .proposal-coauthors-table.trainings-conducted-table thead th:nth-child(1),
+    .terminal-report-paper .proposal-coauthors-table.trainings-conducted-table thead th:nth-child(2),
+    .terminal-report-paper .proposal-coauthors-table.trainings-conducted-table thead th:nth-child(3),
+    .terminal-report-paper .proposal-coauthors-table.trainings-conducted-table thead th:nth-child(4),
+    .terminal-report-paper .proposal-coauthors-table.trainings-conducted-table tbody td:nth-child(1),
+    .terminal-report-paper .proposal-coauthors-table.trainings-conducted-table tbody td:nth-child(2),
+    .terminal-report-paper .proposal-coauthors-table.trainings-conducted-table tbody td:nth-child(3),
+    .terminal-report-paper .proposal-coauthors-table.trainings-conducted-table tbody td:nth-child(4),
+    .progress-report-paper .proposal-coauthors-table.trainings-conducted-table thead th:nth-child(1),
+    .progress-report-paper .proposal-coauthors-table.trainings-conducted-table thead th:nth-child(2),
+    .progress-report-paper .proposal-coauthors-table.trainings-conducted-table thead th:nth-child(3),
+    .progress-report-paper .proposal-coauthors-table.trainings-conducted-table thead th:nth-child(4),
+    .progress-report-paper .proposal-coauthors-table.trainings-conducted-table tbody td:nth-child(1),
+    .progress-report-paper .proposal-coauthors-table.trainings-conducted-table tbody td:nth-child(2),
+    .progress-report-paper .proposal-coauthors-table.trainings-conducted-table tbody td:nth-child(3),
+    .progress-report-paper .proposal-coauthors-table.trainings-conducted-table tbody td:nth-child(4) {
+        width: auto;
+        min-width: 11rem;
+    }
+}
+
+@media (max-width: 899px) {
+    .trainings-conducted-paper .trainings-conducted-scroll-hint {
+        display: block;
+    }
+
+    .trainings-conducted-paper .trainings-conducted-table-wrap {
+        overflow-x: auto;
+    }
+
+    .trainings-conducted-paper .trainings-conducted-table {
+        min-width: 36rem;
+    }
+
+    .trainings-conducted-paper.terminal-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table),
+    .trainings-conducted-paper.progress-report-paper .trainings-conducted-section > .trainings-conducted-table-wrap .trainings-conducted-table:not(.proposal-coauthors-table) {
+        min-width: 64rem;
+    }
+
+    .trainings-conducted-paper .journal-citation-table,
+    .trainings-conducted-paper .book-citation-table {
+        min-width: 52rem;
+    }
+
+    .trainings-conducted-paper .consolidated-journal-citation-section .journal-citation-table {
+        min-width: 68rem;
+    }
+
+    .trainings-conducted-paper .consolidated-book-citation-section .book-citation-table {
+        min-width: 75rem;
+    }
+
+    .trainings-conducted-paper .linkages-table {
+        min-width: 54rem;
+    }
+
+    .trainings-conducted-paper .consolidated-linkages-section .linkages-table {
+        min-width: 75rem;
+    }
+
+    .trainings-conducted-paper .obr-matrix-table {
+        min-width: 98rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .proposal-inline-grid-3,
+    .proposal-check-grid,
+    .proposal-signature-grid,
+    .proposal-signature-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .manuscript-signature-block {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .manuscript-signature-name {
+        white-space: normal;
+    }
+
+    .proposal-page-heading {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .proposal-paper {
+        padding: 0.75rem;
+    }
+
+    .proposal-registry-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .proposal-registry-toolbar {
+        max-width: none;
+    }
+
+    .proposal-registry-table .col-title {
+        max-width: 12rem;
+    }
+
+    .completed-researches-signoff-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .inventions-um-meta-row,
+    .inventions-um-signoff-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}

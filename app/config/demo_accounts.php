@@ -1,0 +1,41 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Demo accounts for development installs.
+ * Password for all: password123
+ *
+ * Seed / refresh with:
+ *   c:\xampp\php\php.exe scripts\seed-demo-accounts.php
+ */
+return [
+    // University-wide
+    ['email' => 'admin@ride.local', 'password' => 'password123', 'role' => 'RIDE Admin (system)', 'name' => 'Ana Reyes', 'college' => 'University-wide'],
+    ['email' => 'vpride@ride.local', 'password' => 'password123', 'role' => 'Admin / VPRIDE', 'name' => 'Ramon Villanueva', 'college' => 'University-wide'],
+    ['email' => 'director.research@ride.local', 'password' => 'password123', 'role' => 'Director of Research', 'name' => 'Liza Mendoza', 'college' => 'University-wide'],
+    ['email' => 'director.extension@ride.local', 'password' => 'password123', 'role' => 'Director of Extension', 'name' => 'Carlos Javier', 'college' => 'University-wide'],
+    // Alias kept for API / README examples
+    ['email' => 'director@ride.local', 'password' => 'password123', 'role' => 'Director of Research', 'name' => 'Liza Mendoza', 'college' => 'University-wide'],
+
+    // CET
+    ['email' => 'coord.research.cet@ride.local', 'password' => 'password123', 'role' => 'Coordinator of Research', 'name' => 'Mark Santos', 'college' => 'CET'],
+    ['email' => 'coord.extension.cet@ride.local', 'password' => 'password123', 'role' => 'Coordinator of Extension', 'name' => 'Grace Lim', 'college' => 'CET'],
+    ['email' => 'dean.cet@ride.local', 'password' => 'password123', 'role' => 'College Dean', 'name' => 'Patricia Ong', 'college' => 'CET'],
+    ['email' => 'faculty.research.cet@ride.local', 'password' => 'password123', 'role' => 'Faculty (Research)', 'name' => 'John Cruz', 'college' => 'CET'],
+    ['email' => 'faculty.extension.cet@ride.local', 'password' => 'password123', 'role' => 'Faculty (Extension)', 'name' => 'Nina Bautista', 'college' => 'CET'],
+
+    // CAS
+    ['email' => 'coord.research.cas@ride.local', 'password' => 'password123', 'role' => 'Coordinator of Research', 'name' => 'Elena Ramos', 'college' => 'CAS'],
+    ['email' => 'coord.extension.cas@ride.local', 'password' => 'password123', 'role' => 'Coordinator of Extension', 'name' => 'Paolo Garcia', 'college' => 'CAS'],
+    ['email' => 'dean.cas@ride.local', 'password' => 'password123', 'role' => 'College Dean', 'name' => 'Isabel Torres', 'college' => 'CAS'],
+    ['email' => 'faculty.research.cas@ride.local', 'password' => 'password123', 'role' => 'Faculty (Research)', 'name' => 'Miguel Lopez', 'college' => 'CAS'],
+    ['email' => 'faculty.extension.cas@ride.local', 'password' => 'password123', 'role' => 'Faculty (Extension)', 'name' => 'Sara Dela Cruz', 'college' => 'CAS'],
+
+    // CBM
+    ['email' => 'coord.research.cbm@ride.local', 'password' => 'password123', 'role' => 'Coordinator of Research', 'name' => 'Daniel Tan', 'college' => 'CBM'],
+    ['email' => 'coord.extension.cbm@ride.local', 'password' => 'password123', 'role' => 'Coordinator of Extension', 'name' => 'Monica Reyes', 'college' => 'CBM'],
+    ['email' => 'dean.cbm@ride.local', 'password' => 'password123', 'role' => 'College Dean', 'name' => 'Antonio Flores', 'college' => 'CBM'],
+    ['email' => 'faculty.research.cbm@ride.local', 'password' => 'password123', 'role' => 'Faculty (Research)', 'name' => 'Rachel Gomez', 'college' => 'CBM'],
+    ['email' => 'faculty.extension.cbm@ride.local', 'password' => 'password123', 'role' => 'Faculty (Extension)', 'name' => 'Kevin Navarro', 'college' => 'CBM'],
+];
