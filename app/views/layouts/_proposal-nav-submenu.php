@@ -322,3 +322,33 @@ $isExtensionMenu = $menuScope === 'extension';
 
 <?php endif; ?>
 
+<?php if ($isExtensionMenu && $showOutreachActivitiesArNav): ?>
+
+    <a href="<?= base_url('proposals/create/outreach-activities-ar' . $scopeQuery) ?>" class="nav-subitem<?= $navActive($outreachActivitiesArNavActive) ? ' active' : '' ?>">
+
+        <span>Outreach Activities AR</span>
+
+    </a>
+
+<?php endif; ?>
+
+<?php if ($isExtensionMenu && $showEbalwasyonNgGawainNav): ?>
+
+    <a href="<?= base_url('proposals/create/ebalwasyon-ng-gawain' . $scopeQuery) ?>" class="nav-subitem<?= $navActive($ebalwasyonNgGawainNavActive) ? ' active' : '' ?>">
+
+        <span>Ebalwasyon ng Gawain</span>
+
+    </a>
+
+<?php endif; ?>
+
+<?php if ($isExtensionMenu && $showAttendanceSheetNav): ?>
+
+    <a href="<?= base_url('proposals/create/attendance-sheet' . $scopeQuery) ?>" class="nav-subitem<?= $navActive($attendanceSheetNavActive) ? ' active' : '' ?>">
+
+        <span>Attendance Sheet</span>
+
+    </a>
+
+<?php endif; ?>
+

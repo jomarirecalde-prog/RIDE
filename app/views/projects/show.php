@@ -135,6 +135,9 @@ if ($extension) $tabs['extension'] = 'Extension';
         'technology_adoption' => 'WPU-QSF-RIDE-ESO Technology Adoption',
         'accomplishment_report' => 'WPU-QSF-RIDE-ESO Accomplishment Report',
         'technical_advisory_ar' => 'WPU-QSF-RIDE-ESO Technical Advisory AR',
+        'outreach_activities_ar' => 'WPU-QSF-RIDE-ESO Outreach Activities AR',
+        'ebalwasyon_ng_gawain' => 'WPU-QSF-RIDE-ESO Ebalwasyon ng Gawain',
+        'attendance_sheet' => 'WPU-QSF-RIDE-ESO Attendance Sheet',
     ];
     $selectedDocumentCategory = $selectedDocumentCategory ?? 'completed_researches';
     ?>

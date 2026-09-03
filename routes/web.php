@@ -85,6 +85,9 @@ $router->get('/proposals/create/outreach-activities', [ProposalController::class
 $router->get('/proposals/create/technology-adoption', [ProposalController::class, 'createTechnologyAdoption'], $auth);
 $router->get('/proposals/create/accomplishment-report', [ProposalController::class, 'createAccomplishmentReport'], $auth);
 $router->get('/proposals/create/technical-advisory-ar', [ProposalController::class, 'createTechnicalAdvisoryAr'], $auth);
+$router->get('/proposals/create/outreach-activities-ar', [ProposalController::class, 'createOutreachActivitiesAr'], $auth);
+$router->get('/proposals/create/ebalwasyon-ng-gawain', [ProposalController::class, 'createEbalwasyonNgGawain'], $auth);
+$router->get('/proposals/create/attendance-sheet', [ProposalController::class, 'createAttendanceSheet'], $auth);
 $router->get('/proposals/create/required-files', [ProposalController::class, 'createRequiredFiles'], $auth);
 $router->post('/proposals/manuscript', [ProposalController::class, 'storeManuscript'], $auth);
 $router->post('/proposals/completed-researches', [ProposalController::class, 'storeCompletedResearches'], $auth);
@@ -118,6 +121,9 @@ $router->post('/proposals/outreach-activities', [ProposalController::class, 'sto
 $router->post('/proposals/technology-adoption', [ProposalController::class, 'storeTechnologyAdoption'], $auth);
 $router->post('/proposals/accomplishment-report', [ProposalController::class, 'storeAccomplishmentReport'], $auth);
 $router->post('/proposals/technical-advisory-ar', [ProposalController::class, 'storeTechnicalAdvisoryAr'], $auth);
+$router->post('/proposals/outreach-activities-ar', [ProposalController::class, 'storeOutreachActivitiesAr'], $auth);
+$router->post('/proposals/ebalwasyon-ng-gawain', [ProposalController::class, 'storeEbalwasyonNgGawain'], $auth);
+$router->post('/proposals/attendance-sheet', [ProposalController::class, 'storeAttendanceSheet'], $auth);
 $router->post('/proposals', [ProposalController::class, 'store'], $auth);
 $router->get('/proposals/{id}', [ProposalController::class, 'show'], $auth);
 $router->get('/proposals/{id}/edit', [ProposalController::class, 'edit'], $auth);
@@ -155,6 +161,9 @@ $router->post('/proposals/{id}/outreach-activities', [ProposalController::class,
 $router->post('/proposals/{id}/technology-adoption', [ProposalController::class, 'updateTechnologyAdoption'], $auth);
 $router->post('/proposals/{id}/accomplishment-report', [ProposalController::class, 'updateAccomplishmentReport'], $auth);
 $router->post('/proposals/{id}/technical-advisory-ar', [ProposalController::class, 'updateTechnicalAdvisoryAr'], $auth);
+$router->post('/proposals/{id}/outreach-activities-ar', [ProposalController::class, 'updateOutreachActivitiesAr'], $auth);
+$router->post('/proposals/{id}/ebalwasyon-ng-gawain', [ProposalController::class, 'updateEbalwasyonNgGawain'], $auth);
+$router->post('/proposals/{id}/attendance-sheet', [ProposalController::class, 'updateAttendanceSheet'], $auth);
 $router->post('/proposals/{id}/update', [ProposalController::class, 'update'], $auth);
 $router->post('/proposals/{id}/submit', [ProposalController::class, 'submit'], $auth);
 $router->post('/proposals/{id}/delete', [ProposalController::class, 'destroy'], $auth);

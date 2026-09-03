@@ -70,6 +70,9 @@ function proposal_nav_scope(): ?string
         'proposals/create/technology-adoption',
         'proposals/create/accomplishment-report',
         'proposals/create/technical-advisory-ar',
+        'proposals/create/outreach-activities-ar',
+        'proposals/create/ebalwasyon-ng-gawain',
+        'proposals/create/attendance-sheet',
     ] as $extensionPath) {
         if ($path === $extensionPath || str_starts_with($path, $extensionPath . '/')) {
             return 'extension';
@@ -396,6 +399,9 @@ function proposal_is_wpu_funded_extension(?array $proposal): bool
         && !proposal_is_technology_adoption($proposal)
         && !proposal_is_accomplishment_report($proposal)
         && !proposal_is_technical_advisory_ar($proposal)
+        && !proposal_is_outreach_activities_ar($proposal)
+        && !proposal_is_ebalwasyon_ng_gawain($proposal)
+        && !proposal_is_attendance_sheet($proposal)
         && !proposal_is_resulted_in_extension($proposal);
 }
 
@@ -580,6 +586,144 @@ function proposal_is_accomplishment_report(?array $proposal): bool
 function proposal_is_technical_advisory_ar(?array $proposal): bool
 {
     return proposal_form_type($proposal) === 'technical_advisory_ar';
+}
+
+function proposal_is_outreach_activities_ar(?array $proposal): bool
+{
+    return proposal_form_type($proposal) === 'outreach_activities_ar';
+}
+
+function proposal_is_ebalwasyon_ng_gawain(?array $proposal): bool
+{
+    return proposal_form_type($proposal) === 'ebalwasyon_ng_gawain';
+}
+
+function proposal_is_attendance_sheet(?array $proposal): bool
+{
+    return proposal_form_type($proposal) === 'attendance_sheet';
+}
+
+/** @return array<string, string> */
+function attendance_sheet_sex_options(): array
+{
+    return [
+        'female' => 'Female',
+        'male' => 'Male',
+    ];
+}
+
+/** @return array<int, string> */
+function ebalwasyon_ng_gawain_scale(): array
+{
+    return [
+        5 => 'Lubhang katangi-tangi',
+        4 => 'Katangi-tangi',
+        3 => 'Kasiya-siya',
+        2 => 'Kainam',
+        1 => 'Mahina',
+    ];
+}
+
+/**
+ * @return list<array{heading: string, items: array<string, string>}>
+ */
+function ebalwasyon_ng_gawain_sections(): array
+{
+    return [
+        [
+            'heading' => 'Layunin at nilalaman ng paksa/ gawain',
+            'items' => [
+                '1_1' => '1.1 Ang layunin ng paksa/gawain ay malinaw, naunawaan at nakamit',
+                '1_2' => '1.2. Ang lawak ng paksa/gawain ay tumugon sa pangangailangan ng komunidad.',
+                '1_3' => '1.3 Ang natutuhang kaalaman ay kapakipakinabang sa pang araw-araw na buhay',
+            ],
+        ],
+        [
+            'heading' => 'Proseso ng Pagtuturo/Pagsasanay/Gawain',
+            'items' => [
+                '2_1' => '2.1 Nagsasagawa ng konsultasyon sa mga benepisyaryo sa pagpaplano ng paksa/gawain.',
+                '2_2' => '2.2 Ang mga benepisyaryo ay naging aktibo sa pakikilahok sa pag-aaral at pagsasanay.',
+                '2_3' => '2.3 Madaling natutuhan ang paksa/gawain.',
+            ],
+        ],
+        [
+            'heading' => 'Tagapagturo, Tagapagsanay at mga Namamalakad',
+            'items' => [
+                '3_1' => '3.1 Masigla at kaayaaya ang paraan ng pagtuturo/pagsasanay.',
+                '3_2' => '3.2 Malawak ang kaalaman ng mga tagapgturo/ tagpagsanay.',
+                '3_3' => '3.3 Magalang at maayos makipag-usap ang mga namamalakad ng gawin/pagsasanay.',
+            ],
+        ],
+        [
+            'heading' => 'Pagsunod sa oras at Iskedyul',
+            'items' => [
+                '4_1' => '4.1 Nagsimula ang gawain/pagsasanay sa tamang oras.',
+                '4_2' => '4.2 Naibigay ang programa ng gawain alinsunod sa Iskedyul.',
+                '4_3' => '4.3 Natapos ang gawain/pagsasanay sa tamang oras.',
+            ],
+        ],
+        [
+            'heading' => 'Lugar ng Gawain at Kagamitan.',
+            'items' => [
+                '5_1' => '5.1 Ang lugar ay maayos at angkop sa gawain/pagsasanay.',
+                '5_2' => '5.2 Ang kagamitan ay sapat para sa gawain/pagsasanay.',
+                '5_3' => '5.3 Ang kagamitan ay tugma para sa gawain/pagsasanay.',
+            ],
+        ],
+    ];
+}
+
+/** @return list<string> */
+function ebalwasyon_ng_gawain_item_keys(): array
+{
+    $keys = [];
+    foreach (ebalwasyon_ng_gawain_sections() as $section) {
+        foreach (array_keys($section['items']) as $key) {
+            $keys[] = $key;
+        }
+    }
+
+    return $keys;
+}
+
+/** @param array<string, mixed> $ratings */
+function ebalwasyon_ng_gawain_average(array $ratings): ?float
+{
+    $values = [];
+    foreach (ebalwasyon_ng_gawain_item_keys() as $key) {
+        $value = $ratings[$key] ?? null;
+        if (is_int($value) || (is_string($value) && preg_match('/^[1-5]$/', $value) === 1)) {
+            $values[] = (int) $value;
+        }
+    }
+
+    if ($values === []) {
+        return null;
+    }
+
+    return round(array_sum($values) / count($values), 2);
+}
+
+function ebalwasyon_ng_gawain_legend(?float $average): string
+{
+    if ($average === null) {
+        return '';
+    }
+
+    if ($average >= 4.5) {
+        return 'Best / Lubhang Katangi-tangi';
+    }
+    if ($average >= 3.5) {
+        return 'Better / Katangi-tangi';
+    }
+    if ($average >= 2.5) {
+        return 'Good / Kasiya-siya';
+    }
+    if ($average >= 1.5) {
+        return 'Fair / Kainaman';
+    }
+
+    return 'Poor / Mahina';
 }
 
 /** @return array<string, float> */

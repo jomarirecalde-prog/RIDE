@@ -50,6 +50,9 @@ $formTypeLabels = [
     'technology_adoption' => 'Technology Adoption',
     'accomplishment_report' => 'Accomplishment Report',
     'technical_advisory_ar' => 'Technical Advisory AR',
+    'outreach_activities_ar' => 'Outreach Activities AR',
+    'ebalwasyon_ng_gawain' => 'Ebalwasyon ng Gawain',
+    'attendance_sheet' => 'Attendance Sheet',
 ];
 $selectedFormType = trim((string) ($_GET['form_type'] ?? ''));
 if ($selectedFormType === '' || !array_key_exists($selectedFormType, $formTypeLabels)) {

@@ -145,6 +145,9 @@ $isAuthStandalone = !\App\Core\Auth::check() && str_ends_with($contentView ?? ''
                 $technologyAdoptionNavActive = nav_active('proposals/create/technology-adoption');
                 $accomplishmentReportNavActive = nav_active('proposals/create/accomplishment-report');
                 $technicalAdvisoryArNavActive = nav_active('proposals/create/technical-advisory-ar');
+                $outreachActivitiesArNavActive = nav_active('proposals/create/outreach-activities-ar');
+                $ebalwasyonNgGawainNavActive = nav_active('proposals/create/ebalwasyon-ng-gawain');
+                $attendanceSheetNavActive = nav_active('proposals/create/attendance-sheet');
                 $requiredFilesNavActive = nav_active('proposals/create/required-files')
                     || preg_match('#^proposals/\d+/edit/required-files$#', request_path()) === 1;
                 $applicantNavActive = nav_active('proposals/create')
@@ -174,6 +177,9 @@ $isAuthStandalone = !\App\Core\Auth::check() && str_ends_with($contentView ?? ''
                     && !$technologyAdoptionNavActive
                     && !$accomplishmentReportNavActive
                     && !$technicalAdvisoryArNavActive
+                    && !$outreachActivitiesArNavActive
+                    && !$ebalwasyonNgGawainNavActive
+                    && !$attendanceSheetNavActive
                     && !$requiredFilesNavActive;
                 $proposalNavItemsActive = $newProposalActive || $requiredFilesNavActive
                     || $manuscriptNavActive || $completedResearchesNavActive || $ongoingResearchesNavActive
@@ -189,7 +195,8 @@ $isAuthStandalone = !\App\Core\Auth::check() && str_ends_with($contentView ?? ''
                     || $obrMatrixNavActive
                     || $trainingsConductedNavActive || $technicalAdvisoryNavActive || $extensionLinkagesNavActive
                     || $outreachActivitiesNavActive || $technologyAdoptionNavActive || $accomplishmentReportNavActive
-                    || $technicalAdvisoryArNavActive;
+                    || $technicalAdvisoryArNavActive || $outreachActivitiesArNavActive || $ebalwasyonNgGawainNavActive
+                    || $attendanceSheetNavActive;
                 $isFacultyAccount = \App\Core\Auth::hasRole('faculty');
                 $showManuscriptNav = \App\Support\MonitoringRoles::canAccessManuscript();
                 $showCompletedResearchesNav = \App\Support\MonitoringRoles::canAccessCompletedResearches();
@@ -224,6 +231,9 @@ $isAuthStandalone = !\App\Core\Auth::check() && str_ends_with($contentView ?? ''
                 $showTechnologyAdoptionNav = \App\Support\MonitoringRoles::canAccessTechnologyAdoption();
                 $showAccomplishmentReportNav = \App\Support\MonitoringRoles::canAccessAccomplishmentReport();
                 $showTechnicalAdvisoryArNav = \App\Support\MonitoringRoles::canAccessTechnicalAdvisoryAr();
+                $showOutreachActivitiesArNav = \App\Support\MonitoringRoles::canAccessOutreachActivitiesAr();
+                $showEbalwasyonNgGawainNav = \App\Support\MonitoringRoles::canAccessEbalwasyonNgGawain();
+                $showAttendanceSheetNav = \App\Support\MonitoringRoles::canAccessAttendanceSheet();
                 $showConsolidatedReportsNav = \App\Support\MonitoringRoles::isCoordinatorResearch();
                 $showResearchProposalNav = !\App\Support\MonitoringRoles::isVpride()
                     && !$showConsolidatedReportsNav
