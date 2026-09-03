@@ -30,13 +30,14 @@ $collegeMap = ['CET' => 1, 'CAS' => 2, 'CBM' => 3];
 $campusMap = ['CET' => 1, 'CAS' => 3, 'CBM' => 4];
 
 $userStmt = $pdo->prepare(
-    'INSERT INTO users (email, password_hash, first_name, last_name, college_id, campus_id)
-     VALUES (?, ?, ?, ?, ?, ?)
+    'INSERT INTO users (email, password_hash, first_name, last_name, college_id, program, campus_id)
+     VALUES (?, ?, ?, ?, ?, ?, ?)
      ON DUPLICATE KEY UPDATE
        password_hash = VALUES(password_hash),
        first_name = VALUES(first_name),
        last_name = VALUES(last_name),
        college_id = VALUES(college_id),
+       program = VALUES(program),
        campus_id = VALUES(campus_id),
        is_active = 1'
 );
@@ -58,7 +59,9 @@ foreach ($accounts as $acc) {
     $collegeId = $collegeMap[$collegeKey] ?? null;
     $campusId = $collegeId ? ($campusMap[$collegeKey] ?? null) : null;
 
-    $userStmt->execute([$acc['email'], $hash, $first, $last, $collegeId, $campusId]);
+    $program = trim((string) ($acc['program'] ?? '')) ?: null;
+
+    $userStmt->execute([$acc['email'], $hash, $first, $last, $collegeId, $program, $campusId]);
     $findUser->execute([$acc['email']]);
     $userId = (int) $findUser->fetchColumn();
 

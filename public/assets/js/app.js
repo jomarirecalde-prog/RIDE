@@ -107,6 +107,13 @@
     );
 
     initCollapsibleNav(
+        'research-extension-nav',
+        'research-extension-nav-toggle',
+        'research-extension-submenu',
+        'ride:nav:research-extension-collapsed'
+    );
+
+    initCollapsibleNav(
         'consolidated-reports-nav',
         'consolidated-reports-nav-toggle',
         'consolidated-reports-submenu',

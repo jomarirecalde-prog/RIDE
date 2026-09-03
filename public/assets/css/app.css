@@ -2083,6 +2083,87 @@ th { background: #f9fafb; font-size: 0.85rem; }
     cursor: default;
 }
 
+.eso-identifying-table th {
+    width: 16rem;
+    white-space: normal;
+}
+
+.eso-framework-table,
+.eso-workplan-table {
+    width: max-content;
+    min-width: 100%;
+}
+
+.eso-framework-table th,
+.eso-workplan-table th,
+.eso-framework-table td,
+.eso-workplan-table td {
+    min-width: 9rem;
+    vertical-align: top;
+}
+
+.eso-budget-group {
+    margin-top: 1.25rem;
+}
+
+.eso-budget-group-label {
+    width: min(22rem, 100%);
+    display: inline-block;
+    font-weight: 600;
+}
+
+.eso-line-total,
+.eso-group-subtotal {
+    background: #f5f5f5;
+    font-weight: 700;
+}
+
+.eso-signoff-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.eso-signoff-grid input {
+    width: 100%;
+    margin-bottom: 0.4rem;
+}
+
+.eso-faculty-picker-filters {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(11rem, 0.7fr) minmax(13rem, 0.9fr);
+    gap: 0.65rem 1rem;
+    align-items: end;
+}
+
+.eso-faculty-picker-filters > div {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.eso-faculty-picker-filters .proposal-coauthor-picker-label {
+    grid-column: auto;
+}
+
+.eso-faculty-college-filter,
+.eso-faculty-select {
+    max-width: none;
+}
+
+.eso-faculty-select {
+    min-height: 12rem;
+}
+
+@media (max-width: 900px) {
+    .eso-signoff-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .eso-faculty-picker-filters {
+        grid-template-columns: 1fr;
+    }
+}
+
 .completed-researches-add-row-wrap {
     margin-top: 0.75rem;
 }

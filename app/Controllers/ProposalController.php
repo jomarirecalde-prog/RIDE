@@ -92,6 +92,11 @@ final class ProposalController
             view('proposals.wpu-funded-extension-form', [
                 'proposal' => null,
                 'lockedProjectType' => 'extension',
+                'colleges' => College::all(),
+                'pageTitle' => 'New Extension Program/Project Proposal — RIDE IMS',
+                'pageHeading' => 'Research Extension',
+                'pageSubtitle' => 'Complete the Office of Extension Services program/project proposal (WPU-QSF-RIDE-ESO-03).',
+                'facultyTeamOptions' => $this->facultyTeamOptions(),
             ]);
             return;
         }
@@ -2286,6 +2291,9 @@ final class ProposalController
             'canApprove' => $this->canApprove($proposal),
             'approveLabel' => MonitoringRoles::actionLabel((string) ($proposal['current_step'] ?? '')),
             'stepLabel' => MonitoringRoles::stepLabel((string) ($proposal['current_step'] ?? '')),
+            'pageTitle' => ((string) ($proposal['title'] ?? 'Extension Program/Project Proposal')) . ' — RIDE IMS',
+            'pageHeading' => (string) ($proposal['title'] ?? 'Extension Program/Project Proposal'),
+            'pageSubtitle' => 'Review the submitted Extension Program/Project Proposal (WPU-QSF-RIDE-ESO-03).',
         ]);
     }
 
@@ -2929,6 +2937,11 @@ final class ProposalController
             view('proposals.wpu-funded-extension-form', [
                 'proposal' => $proposal,
                 'lockedProjectType' => 'extension',
+                'colleges' => College::all(),
+                'pageTitle' => 'Edit Extension Program/Project Proposal — RIDE IMS',
+                'pageHeading' => 'Research Extension',
+                'pageSubtitle' => 'Update your Extension Program/Project Proposal before saving or resubmitting.',
+                'facultyTeamOptions' => $this->facultyTeamOptions(),
             ]);
             return;
         }
@@ -3190,109 +3203,163 @@ final class ProposalController
     /** @return array<string, mixed> */
     private function validatedWpuFundedExtensionInput(): array
     {
+        $sourceOfFund = trim($_POST['source_of_fund'] ?? '');
         $structuredSummary = [
-            'form_type' => 'wpu_funded_extension',
-            'version' => 1,
-            'reference_number' => trim($_POST['reference_number'] ?? ''),
-            'program_leader_first_name' => trim($_POST['program_leader_first_name'] ?? ''),
-            'program_leader_middle_name' => trim($_POST['program_leader_middle_name'] ?? ''),
-            'program_leader_last_name' => trim($_POST['program_leader_last_name'] ?? ''),
-            'program_leader_title_prefix' => trim($_POST['program_leader_title_prefix'] ?? ''),
-            'program_leader_gender' => trim($_POST['program_leader_gender'] ?? ''),
-            'program_leader_academic_rank' => trim($_POST['program_leader_academic_rank'] ?? ''),
-            'program_leader_date' => trim($_POST['program_leader_date'] ?? ''),
-            'program_leader_email' => trim($_POST['program_leader_email'] ?? ''),
-            'program_leader_contact_number' => trim($_POST['program_leader_contact_number'] ?? ''),
-            'program_leader_college' => trim($_POST['program_leader_college'] ?? ''),
-            'program_leader_department' => trim($_POST['program_leader_department'] ?? ''),
-            'introduction' => trim($_POST['introduction'] ?? ''),
-            'objectives' => trim($_POST['objectives'] ?? ''),
-            'expected_outputs' => trim($_POST['expected_outputs'] ?? ''),
-            'program_summary' => $this->validatedProgramSummary($_POST['program_summary'] ?? []),
-            'program_summary_total_source' => trim($_POST['program_summary_total_source'] ?? ''),
+            'form_type' => 'extension_program_proposal',
+            'version' => 2,
+            'college_extension_program' => trim($_POST['college_extension_program'] ?? ''),
+            'project_team_leader' => trim($_POST['project_team_leader'] ?? ''),
+            'members_trainers' => trim($_POST['members_trainers'] ?? ''),
+            'implementing_college_department' => trim($_POST['implementing_college_department'] ?? ''),
+            'collaborating_organizations' => trim($_POST['collaborating_organizations'] ?? ''),
+            'beneficiaries' => trim($_POST['beneficiaries'] ?? ''),
+            'male_beneficiaries' => trim($_POST['male_beneficiaries'] ?? ''),
+            'female_beneficiaries' => trim($_POST['female_beneficiaries'] ?? ''),
+            'duration_inclusive_dates' => trim($_POST['duration_inclusive_dates'] ?? ''),
+            'location' => trim($_POST['location'] ?? ''),
+            'budget' => trim($_POST['budget'] ?? ''),
+            'source_of_fund' => $sourceOfFund,
+            'rationale' => trim($_POST['rationale'] ?? ''),
+            'general_objective' => trim($_POST['general_objective'] ?? ''),
+            'specific_objectives' => trim($_POST['specific_objectives'] ?? ''),
+            'community_analysis' => trim($_POST['community_analysis'] ?? ''),
+            'problem_analysis' => trim($_POST['problem_analysis'] ?? ''),
+            'target_group_description' => trim($_POST['target_group_description'] ?? ''),
+            'partnerships' => $this->validatedKeyedRows($_POST['partnerships'] ?? [], [
+                'partner',
+                'task_description',
+                'area_of_responsibility',
+                'resource_sharing',
+            ]),
+            'team_duties' => $this->validatedKeyedRows($_POST['team_duties'] ?? [], [
+                'user_id',
+                'member',
+                'college',
+                'department',
+                'role',
+                'task_description',
+                'responsibility',
+            ]),
+            'logical_framework' => $this->validatedKeyedRows($_POST['logical_framework'] ?? [], [
+                'inputs',
+                'activities',
+                'outputs',
+                'effects',
+                'outcomes',
+                'impact',
+                'sdg',
+            ]),
+            'methodology' => trim($_POST['methodology'] ?? ''),
+            'activities_narrative' => trim($_POST['activities_narrative'] ?? ''),
+            'work_plan' => $this->validatedKeyedRows($_POST['work_plan'] ?? [], [
+                'activities',
+                'objective',
+                'indicator',
+                'strategies',
+                'time_frame',
+                'responsible_persons',
+                'budget_needed',
+                'outputs',
+            ]),
+            'budget_general' => $this->validatedKeyedRows($_POST['budget_general'] ?? [], [
+                'item',
+                'particulars',
+                'amount',
+            ]),
+            'budget_line_groups' => $this->validatedBudgetLineGroups($_POST['budget_line_groups'] ?? []),
+            'references' => trim($_POST['references'] ?? ''),
+            'proponent_name' => trim($_POST['proponent_name'] ?? ''),
+            'proponent_date' => trim($_POST['proponent_date'] ?? ''),
+            'dean_name' => trim($_POST['dean_name'] ?? ''),
+            'dean_date' => trim($_POST['dean_date'] ?? ''),
+            'extension_admin_name' => trim($_POST['extension_admin_name'] ?? ''),
+            'extension_admin_date' => trim($_POST['extension_admin_date'] ?? ''),
         ];
-        $structuredSummary['program_summary_total_amount'] = $this->formatProgramSummaryTotalAmount(
-            $structuredSummary['program_summary']
-        );
 
         return [
             'title' => trim($_POST['title'] ?? ''),
             'summary' => json_encode($structuredSummary, JSON_UNESCAPED_SLASHES) ?: '',
             'project_type' => 'extension',
-            'funding_source' => 'WPU Funded Extension Program',
+            'funding_source' => $sourceOfFund,
             'risk_level' => 'low',
             'ethics_required' => false,
         ];
     }
 
-    /** @return list<array{project_title: string, activities: list<array{training_activity: string, target_date: string, amount: string, source_of_fund: string}>}> */
-    private function validatedProgramSummary(mixed $rows): array
+    /**
+     * @param list<string> $keys
+     * @return list<array<string, string>>
+     */
+    private function validatedKeyedRows(mixed $rows, array $keys, int $max = 40): array
     {
         if (!is_array($rows)) {
             return [];
         }
 
-        $projects = [];
-        foreach (array_slice($rows, 0, 20) as $row) {
+        $out = [];
+        foreach (array_slice($rows, 0, $max) as $row) {
             if (!is_array($row)) {
                 continue;
             }
 
-            $activities = [];
-            foreach (array_slice(is_array($row['activities'] ?? null) ? $row['activities'] : [], 0, 30) as $activity) {
-                if (!is_array($activity)) {
-                    continue;
+            $entry = [];
+            $hasContent = false;
+            foreach ($keys as $key) {
+                $value = trim((string) ($row[$key] ?? ''));
+                $entry[$key] = $value;
+                if ($value !== '') {
+                    $hasContent = true;
                 }
-
-                $entry = [
-                    'training_activity' => trim((string) ($activity['training_activity'] ?? '')),
-                    'target_date' => trim((string) ($activity['target_date'] ?? '')),
-                    'amount' => trim((string) ($activity['amount'] ?? '')),
-                    'source_of_fund' => trim((string) ($activity['source_of_fund'] ?? '')),
-                ];
-
-                if ($entry['training_activity'] === ''
-                    && $entry['target_date'] === ''
-                    && $entry['amount'] === ''
-                    && $entry['source_of_fund'] === '') {
-                    continue;
-                }
-
-                $activities[] = $entry;
             }
 
-            $projectTitle = trim((string) ($row['project_title'] ?? ''));
-            if ($projectTitle === '' && $activities === []) {
+            if ($hasContent) {
+                $out[] = $entry;
+            }
+        }
+
+        return $out;
+    }
+
+    /**
+     * @return list<array{label: string, items: list<array<string, string>>}>
+     */
+    private function validatedBudgetLineGroups(mixed $groups): array
+    {
+        if (!is_array($groups)) {
+            return [];
+        }
+
+        $out = [];
+        foreach (array_slice($groups, 0, 8) as $index => $group) {
+            if (!is_array($group)) {
                 continue;
             }
 
-            $projects[] = [
-                'project_title' => $projectTitle,
-                'activities' => $activities,
+            $label = trim((string) ($group['label'] ?? ''));
+            if ($label === '') {
+                $label = 'Line-Item Budget ' . ($index + 1);
+            }
+
+            $items = $this->validatedKeyedRows($group['items'] ?? [], [
+                'item_no',
+                'particulars',
+                'qty',
+                'unit',
+                'cost_unit',
+                'total_cost',
+            ], 30);
+
+            if ($items === []) {
+                continue;
+            }
+
+            $out[] = [
+                'label' => $label,
+                'items' => $items,
             ];
         }
 
-        return $projects;
-    }
-
-    /** @param list<array{project_title: string, activities: list<array{training_activity: string, target_date: string, amount: string, source_of_fund: string}>}> $programSummary */
-    private function formatProgramSummaryTotalAmount(array $programSummary): string
-    {
-        $total = 0.0;
-        foreach ($programSummary as $project) {
-            foreach ($project['activities'] ?? [] as $activity) {
-                $total += $this->parseAmountValue((string) ($activity['amount'] ?? ''));
-            }
-        }
-
-        return number_format($total, 2, '.', ',');
-    }
-
-    private function parseAmountValue(string $value): float
-    {
-        $cleaned = preg_replace('/[^\d.-]/', '', str_replace(',', '', $value)) ?? '';
-
-        return is_numeric($cleaned) ? (float) $cleaned : 0.0;
+        return $out;
     }
 
     private function validatedManuscriptInput(): array
@@ -5350,6 +5417,48 @@ final class ProposalController
         return $coAuthors;
     }
 
+    /** @return list<array{id: int, label: string, name: string, college_name: string, department: string, department_label: string}> */
+    private function facultyTeamOptions(): array
+    {
+        $options = [];
+        foreach (User::allFaculty() as $row) {
+            $id = (int) ($row['id'] ?? 0);
+            if ($id <= 0) {
+                continue;
+            }
+
+            $lastName = trim((string) ($row['last_name'] ?? ''));
+            $firstName = trim((string) ($row['first_name'] ?? ''));
+            $collegeName = trim((string) ($row['college_name'] ?? ''));
+            $department = trim((string) ($row['program'] ?? ''));
+            $departmentLabel = $department !== '' ? $department : 'No department/program assigned';
+            $fullName = trim($firstName . ' ' . $lastName);
+            if ($fullName === '') {
+                $fullName = trim($lastName . ', ' . $firstName);
+            }
+
+            $labelParts = [];
+            if ($lastName !== '' || $firstName !== '') {
+                $labelParts[] = trim($lastName . ', ' . $firstName, ', ');
+            }
+            if ($collegeName !== '') {
+                $labelParts[] = $collegeName;
+            }
+            $labelParts[] = $departmentLabel;
+
+            $options[] = [
+                'id' => $id,
+                'label' => implode(' · ', $labelParts) !== '' ? implode(' · ', $labelParts) : $fullName,
+                'name' => $fullName,
+                'college_name' => $collegeName,
+                'department' => $department,
+                'department_label' => $departmentLabel,
+            ];
+        }
+
+        return $options;
+    }
+
     /** @return list<array{id: int, label: string, last_name: string, first_name: string, middle_name: string, college_name: string}> */
     private function facultyCoAuthorOptions(): array
     {
@@ -5828,7 +5937,7 @@ final class ProposalController
             return true;
         }
 
-        if (($decoded['form_type'] ?? '') === 'wpu_funded_extension') {
+        if (in_array((string) ($decoded['form_type'] ?? ''), ['wpu_funded_extension', 'extension_program_proposal'], true)) {
             return false;
         }
 

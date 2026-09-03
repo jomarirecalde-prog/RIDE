@@ -255,7 +255,10 @@ $isAuthStandalone = !\App\Core\Auth::check() && str_ends_with($contentView ?? ''
                     </button>
                     <div class="nav-submenu" id="research-proposal-submenu">
                     <?php
-                    $menuScope = 'research';
+                    $menuScope = (\App\Support\MonitoringRoles::isCoordinatorExtension()
+                        || \App\Support\MonitoringRoles::isDirectorExtension())
+                        ? 'extension'
+                        : 'research';
                     require APP_PATH . '/views/layouts/_proposal-nav-submenu.php';
                     ?>
                     </div>
@@ -292,10 +295,19 @@ $isAuthStandalone = !\App\Core\Auth::check() && str_ends_with($contentView ?? ''
                 </div>
                 <?php endif; ?>
                 <?php if ($isFacultyAccount && $showResearchProposalNav): ?>
-                <a href="<?= base_url('proposals/create' . proposal_nav_scope_query('extension')) ?>" class="nav-item<?= $researchExtensionNavActive ? ' active' : '' ?>">
-                    <i class="fas fa-hands-helping" aria-hidden="true"></i>
-                    <span>Research Extension</span>
-                </a>
+                <div class="nav-group nav-group-collapsible" id="research-extension-nav" data-nav-collapsible>
+                    <button type="button" class="nav-item nav-item-toggle<?= $researchExtensionNavActive ? ' active' : '' ?>" id="research-extension-nav-toggle" aria-expanded="true" aria-controls="research-extension-submenu">
+                        <i class="fas fa-hands-helping" aria-hidden="true"></i>
+                        <span>Research Extension</span>
+                        <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
+                    </button>
+                    <div class="nav-submenu" id="research-extension-submenu">
+                    <?php
+                    $menuScope = 'extension';
+                    require APP_PATH . '/views/layouts/_proposal-nav-submenu.php';
+                    ?>
+                    </div>
+                </div>
                 <?php endif; ?>
                 <?php if (\App\Core\Auth::hasRole('ride_reporter') && !$isVprideAccount): ?>
                     <a href="<?= base_url('reports/extension-beneficiaries') ?>" class="nav-item<?= nav_active('reports') ? ' active' : '' ?>">

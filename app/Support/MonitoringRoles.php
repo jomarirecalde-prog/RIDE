@@ -416,7 +416,7 @@ final class MonitoringRoles
 
     {
 
-        return self::isExtensionScoped();
+        return self::isExtensionScoped() || Auth::hasRole('faculty');
 
     }
 

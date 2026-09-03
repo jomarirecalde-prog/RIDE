@@ -57,8 +57,24 @@ function proposal_nav_scope(): ?string
     }
 
     $scope = trim((string) ($_GET['scope'] ?? $_POST['nav_scope'] ?? ''));
+    if ($scope === 'extension' || $scope === 'research') {
+        return $scope;
+    }
 
-    return $scope === 'extension' ? 'extension' : 'research';
+    $path = request_path();
+    foreach ([
+        'proposals/create/trainings-conducted',
+        'proposals/create/technical-advisory',
+        'proposals/create/extension-linkages',
+        'proposals/create/outreach-activities',
+        'proposals/create/technology-adoption',
+    ] as $extensionPath) {
+        if ($path === $extensionPath || str_starts_with($path, $extensionPath . '/')) {
+            return 'extension';
+        }
+    }
+
+    return 'research';
 }
 
 function proposal_nav_scope_query(string $menuScope): string
@@ -367,7 +383,7 @@ function proposal_is_wpu_funded_extension(?array $proposal): bool
     }
 
     $formType = proposal_form_type($proposal);
-    if ($formType !== '' && $formType !== 'wpu_funded_extension') {
+    if ($formType !== '' && !in_array($formType, ['wpu_funded_extension', 'extension_program_proposal'], true)) {
         return false;
     }
 
