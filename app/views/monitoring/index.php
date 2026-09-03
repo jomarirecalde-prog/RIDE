@@ -46,6 +46,10 @@ $formTypeLabels = [
     'trainings_conducted' => 'Trainings Conducted',
     'technical_advisory' => 'Technical Advisory',
     'extension_linkages' => 'Extension Linkages',
+    'outreach_activities' => 'Outreach Activities',
+    'technology_adoption' => 'Technology Adoption',
+    'accomplishment_report' => 'Accomplishment Report',
+    'technical_advisory_ar' => 'Technical Advisory AR',
 ];
 $selectedFormType = trim((string) ($_GET['form_type'] ?? ''));
 if ($selectedFormType === '' || !array_key_exists($selectedFormType, $formTypeLabels)) {

@@ -302,3 +302,23 @@ $isExtensionMenu = $menuScope === 'extension';
 
 <?php endif; ?>
 
+<?php if ($isExtensionMenu && $showAccomplishmentReportNav): ?>
+
+    <a href="<?= base_url('proposals/create/accomplishment-report' . $scopeQuery) ?>" class="nav-subitem<?= $navActive($accomplishmentReportNavActive) ? ' active' : '' ?>">
+
+        <span>Accomplishment Report</span>
+
+    </a>
+
+<?php endif; ?>
+
+<?php if ($isExtensionMenu && $showTechnicalAdvisoryArNav): ?>
+
+    <a href="<?= base_url('proposals/create/technical-advisory-ar' . $scopeQuery) ?>" class="nav-subitem<?= $navActive($technicalAdvisoryArNavActive) ? ' active' : '' ?>">
+
+        <span>Technical Advisory AR</span>
+
+    </a>
+
+<?php endif; ?>
+

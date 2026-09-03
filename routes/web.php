@@ -83,6 +83,8 @@ $router->get('/proposals/create/technical-advisory', [ProposalController::class,
 $router->get('/proposals/create/extension-linkages', [ProposalController::class, 'createExtensionLinkages'], $auth);
 $router->get('/proposals/create/outreach-activities', [ProposalController::class, 'createOutreachActivities'], $auth);
 $router->get('/proposals/create/technology-adoption', [ProposalController::class, 'createTechnologyAdoption'], $auth);
+$router->get('/proposals/create/accomplishment-report', [ProposalController::class, 'createAccomplishmentReport'], $auth);
+$router->get('/proposals/create/technical-advisory-ar', [ProposalController::class, 'createTechnicalAdvisoryAr'], $auth);
 $router->get('/proposals/create/required-files', [ProposalController::class, 'createRequiredFiles'], $auth);
 $router->post('/proposals/manuscript', [ProposalController::class, 'storeManuscript'], $auth);
 $router->post('/proposals/completed-researches', [ProposalController::class, 'storeCompletedResearches'], $auth);
@@ -114,6 +116,8 @@ $router->post('/proposals/technical-advisory', [ProposalController::class, 'stor
 $router->post('/proposals/extension-linkages', [ProposalController::class, 'storeExtensionLinkages'], $auth);
 $router->post('/proposals/outreach-activities', [ProposalController::class, 'storeOutreachActivities'], $auth);
 $router->post('/proposals/technology-adoption', [ProposalController::class, 'storeTechnologyAdoption'], $auth);
+$router->post('/proposals/accomplishment-report', [ProposalController::class, 'storeAccomplishmentReport'], $auth);
+$router->post('/proposals/technical-advisory-ar', [ProposalController::class, 'storeTechnicalAdvisoryAr'], $auth);
 $router->post('/proposals', [ProposalController::class, 'store'], $auth);
 $router->get('/proposals/{id}', [ProposalController::class, 'show'], $auth);
 $router->get('/proposals/{id}/edit', [ProposalController::class, 'edit'], $auth);
@@ -149,6 +153,8 @@ $router->post('/proposals/{id}/technical-advisory', [ProposalController::class, 
 $router->post('/proposals/{id}/extension-linkages', [ProposalController::class, 'updateExtensionLinkages'], $auth);
 $router->post('/proposals/{id}/outreach-activities', [ProposalController::class, 'updateOutreachActivities'], $auth);
 $router->post('/proposals/{id}/technology-adoption', [ProposalController::class, 'updateTechnologyAdoption'], $auth);
+$router->post('/proposals/{id}/accomplishment-report', [ProposalController::class, 'updateAccomplishmentReport'], $auth);
+$router->post('/proposals/{id}/technical-advisory-ar', [ProposalController::class, 'updateTechnicalAdvisoryAr'], $auth);
 $router->post('/proposals/{id}/update', [ProposalController::class, 'update'], $auth);
 $router->post('/proposals/{id}/submit', [ProposalController::class, 'submit'], $auth);
 $router->post('/proposals/{id}/delete', [ProposalController::class, 'destroy'], $auth);

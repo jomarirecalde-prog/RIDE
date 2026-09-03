@@ -74,6 +74,12 @@ $lessonsLearned = is_string($summaryData['lessons_learned'] ?? null) ? $summaryD
 
     <?= csrf_field() ?>
 
+    <?php if (proposal_nav_scope() !== null): ?>
+
+        <input type="hidden" name="nav_scope" value="extension">
+
+    <?php endif; ?>
+
 
 
     <header class="completed-researches-header">

@@ -68,6 +68,8 @@ function proposal_nav_scope(): ?string
         'proposals/create/extension-linkages',
         'proposals/create/outreach-activities',
         'proposals/create/technology-adoption',
+        'proposals/create/accomplishment-report',
+        'proposals/create/technical-advisory-ar',
     ] as $extensionPath) {
         if ($path === $extensionPath || str_starts_with($path, $extensionPath . '/')) {
             return 'extension';
@@ -392,6 +394,8 @@ function proposal_is_wpu_funded_extension(?array $proposal): bool
         && !proposal_is_technical_advisory($proposal)
         && !proposal_is_outreach_activities($proposal)
         && !proposal_is_technology_adoption($proposal)
+        && !proposal_is_accomplishment_report($proposal)
+        && !proposal_is_technical_advisory_ar($proposal)
         && !proposal_is_resulted_in_extension($proposal);
 }
 
@@ -566,6 +570,16 @@ function proposal_is_outreach_activities(?array $proposal): bool
 function proposal_is_technology_adoption(?array $proposal): bool
 {
     return proposal_form_type($proposal) === 'technology_adoption';
+}
+
+function proposal_is_accomplishment_report(?array $proposal): bool
+{
+    return proposal_form_type($proposal) === 'accomplishment_report';
+}
+
+function proposal_is_technical_advisory_ar(?array $proposal): bool
+{
+    return proposal_form_type($proposal) === 'technical_advisory_ar';
 }
 
 /** @return array<string, float> */

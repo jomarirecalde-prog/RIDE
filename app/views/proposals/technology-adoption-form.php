@@ -37,6 +37,9 @@ $lessonsLearned = is_string($summaryData['lessons_learned'] ?? null) ? $summaryD
 
 <form class="proposal-paper completed-researches-paper trainings-conducted-paper" method="post" enctype="multipart/form-data" action="<?= $isEdit ? base_url('proposals/' . $proposal['id'] . '/technology-adoption') : base_url('proposals/technology-adoption') ?>">
     <?= csrf_field() ?>
+    <?php if (proposal_nav_scope() !== null): ?>
+        <input type="hidden" name="nav_scope" value="extension">
+    <?php endif; ?>
 
     <header class="completed-researches-header">
         <p class="completed-researches-header-line">Republic of the Philippines</p>

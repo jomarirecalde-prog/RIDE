@@ -426,7 +426,7 @@ final class MonitoringRoles
 
     {
 
-        return self::isExtensionScoped();
+        return self::isExtensionScoped() || Auth::hasRole('faculty');
 
     }
 
@@ -436,7 +436,7 @@ final class MonitoringRoles
 
     {
 
-        return self::isExtensionScoped();
+        return self::isExtensionScoped() || Auth::hasRole('faculty');
 
     }
 
@@ -446,7 +446,7 @@ final class MonitoringRoles
 
     {
 
-        return self::isExtensionScoped();
+        return self::isExtensionScoped() || Auth::hasRole('faculty');
 
     }
 
@@ -456,7 +456,27 @@ final class MonitoringRoles
 
     {
 
-        return self::isExtensionScoped();
+        return self::isExtensionScoped() || Auth::hasRole('faculty');
+
+    }
+
+
+
+    public static function canAccessAccomplishmentReport(): bool
+
+    {
+
+        return self::isExtensionScoped() || Auth::hasRole('faculty');
+
+    }
+
+
+
+    public static function canAccessTechnicalAdvisoryAr(): bool
+
+    {
+
+        return self::isExtensionScoped() || Auth::hasRole('faculty');
 
     }
 
