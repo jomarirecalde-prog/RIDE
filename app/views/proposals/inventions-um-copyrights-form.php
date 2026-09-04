@@ -91,10 +91,22 @@ $fieldNames = [
         </table>
     </section>
 
-    <section class="proposal-section trainings-conducted-section">
+    <section class="proposal-section trainings-conducted-section inventions-um-section">
         <p class="trainings-conducted-scroll-hint proposal-section-note">Scroll horizontally to view all columns, including <strong>Google Drive Link</strong> for attached files.</p>
         <div class="proposal-table-wrap trainings-conducted-table-wrap inventions-um-table-wrap">
             <table class="proposal-table inventions-um-table trainings-conducted-table">
+                <colgroup>
+                    <col class="ium-col-title">
+                    <col class="ium-col-date">
+                    <col class="ium-col-date">
+                    <col class="ium-col-inventors">
+                    <col class="ium-col-patent">
+                    <col class="ium-col-date">
+                    <col class="ium-col-adopter">
+                    <col class="ium-col-product">
+                    <col class="ium-col-drive">
+                    <col class="ium-col-actions">
+                </colgroup>
                 <thead>
                     <tr>
                         <th>Research Title</th>

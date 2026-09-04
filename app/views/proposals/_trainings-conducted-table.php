@@ -100,7 +100,7 @@ $renderRow = static function (string $sectionKey, int $index, array $row, bool $
     <?php
 };
 ?>
-<section class="proposal-section trainings-conducted-section">
+<section class="proposal-section trainings-conducted-section eso-trainings-section">
     <p class="trainings-conducted-scroll-hint proposal-section-note">Scroll horizontally to view all columns.</p>
     <div class="proposal-table-wrap trainings-conducted-table-wrap">
         <table class="proposal-table completed-researches-table trainings-conducted-table">

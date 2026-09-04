@@ -74,7 +74,7 @@ $budgetLineGroups = $rowsOrEmpty($summaryData['budget_line_groups'] ?? []);
     <?php endif; ?>
 </div>
 
-<div class="proposal-paper completed-researches-paper eso-extension-paper">
+<div class="proposal-paper completed-researches-paper eso-extension-paper wpu-funded-extension-paper">
     <header class="completed-researches-header">
         <p class="completed-researches-header-line">Republic of the Philippines</p>
         <p class="completed-researches-header-line completed-researches-header-line--strong">WESTERN PHILIPPINES UNIVERSITY</p>
@@ -207,8 +207,8 @@ $budgetLineGroups = $rowsOrEmpty($summaryData['budget_line_groups'] ?? []);
         <?php if ($teamDuties === []): ?>
             <p>—</p>
         <?php else: ?>
-            <div class="proposal-table-wrap">
-                <table class="proposal-table">
+            <div class="proposal-table-wrap trainings-conducted-table-wrap">
+                <table class="proposal-table trainings-conducted-table eso-team-duties-table">
                     <thead>
                         <tr>
                             <th>Member</th>

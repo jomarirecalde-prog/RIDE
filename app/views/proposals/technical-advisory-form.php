@@ -70,7 +70,7 @@ $lessonsLearned = is_string($summaryData['lessons_learned'] ?? null) ? $summaryD
 
 
 
-<form class="proposal-paper completed-researches-paper trainings-conducted-paper" method="post" enctype="multipart/form-data" action="<?= $isEdit ? base_url('proposals/' . $proposal['id'] . '/technical-advisory') : base_url('proposals/technical-advisory') ?>">
+<form class="proposal-paper completed-researches-paper trainings-conducted-paper eso-extension-paper" method="post" enctype="multipart/form-data" action="<?= $isEdit ? base_url('proposals/' . $proposal['id'] . '/technical-advisory') : base_url('proposals/technical-advisory') ?>">
 
     <?= csrf_field() ?>
 

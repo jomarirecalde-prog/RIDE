@@ -2089,17 +2089,63 @@ th { background: #f9fafb; font-size: 0.85rem; }
 }
 
 .eso-framework-table,
-.eso-workplan-table {
+.eso-workplan-table,
+.eso-team-duties-table {
     width: max-content;
     min-width: 100%;
+    table-layout: auto;
 }
 
 .eso-framework-table th,
 .eso-workplan-table th,
 .eso-framework-table td,
 .eso-workplan-table td {
-    min-width: 9rem;
+    min-width: 11rem;
     vertical-align: top;
+}
+
+.eso-team-duties-table th,
+.eso-team-duties-table td {
+    min-width: 10rem;
+    vertical-align: top;
+}
+
+.eso-team-duties-table .completed-researches-actions-col,
+.eso-framework-table .completed-researches-actions-col,
+.eso-workplan-table .completed-researches-actions-col {
+    min-width: 5.75rem;
+}
+
+.wpu-funded-extension-paper .trainings-conducted-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.wpu-funded-extension-paper .eso-team-duties-table.trainings-conducted-table {
+    min-width: 72rem;
+}
+
+.wpu-funded-extension-paper .eso-framework-table.trainings-conducted-table {
+    min-width: 88rem;
+}
+
+.wpu-funded-extension-paper .eso-workplan-table.trainings-conducted-table {
+    min-width: 96rem;
+}
+
+.wpu-funded-extension-paper .trainings-conducted-table-wrap::-webkit-scrollbar {
+    height: 12px;
+}
+
+.wpu-funded-extension-paper .trainings-conducted-table-wrap::-webkit-scrollbar-track {
+    background: #fff;
+    border: 1px solid #111;
+    border-radius: 0;
+}
+
+.wpu-funded-extension-paper .trainings-conducted-table-wrap::-webkit-scrollbar-thumb {
+    background: #111;
+    border-radius: 0;
 }
 
 .eso-budget-group {
@@ -2362,17 +2408,17 @@ th { background: #f9fafb; font-size: 0.85rem; }
     margin-top: 0.15rem;
 }
 
-.trainings-conducted-table col.tc-col-program { width: 8.5rem; }
-.trainings-conducted-table col.tc-col-title { width: 8.5rem; }
-.trainings-conducted-table col.tc-col-venue { width: 7rem; }
-.trainings-conducted-table col.tc-col-date { width: 8.25rem; }
-.trainings-conducted-table col.tc-col-participants { width: 7rem; }
-.trainings-conducted-table col.tc-col-count { width: 4.75rem; }
-.trainings-conducted-table col.tc-col-weighted { width: 11.5rem; }
-.trainings-conducted-table col.tc-col-personnel { width: 7rem; }
-.trainings-conducted-table col.tc-col-budget { width: 6.25rem; }
-.trainings-conducted-table col.tc-col-rating { width: 3.35rem; }
-.trainings-conducted-table col.tc-col-actions { width: 5.75rem; }
+.trainings-conducted-table col.tc-col-program { width: 8.5rem; min-width: 8.5rem; }
+.trainings-conducted-table col.tc-col-title { width: 8.5rem; min-width: 8.5rem; }
+.trainings-conducted-table col.tc-col-venue { width: 7rem; min-width: 7rem; }
+.trainings-conducted-table col.tc-col-date { width: 8.25rem; min-width: 8.25rem; }
+.trainings-conducted-table col.tc-col-participants { width: 7rem; min-width: 7rem; }
+.trainings-conducted-table col.tc-col-count { width: 4.75rem; min-width: 4.75rem; }
+.trainings-conducted-table col.tc-col-weighted { width: 11.5rem; min-width: 11.5rem; }
+.trainings-conducted-table col.tc-col-personnel { width: 7rem; min-width: 7rem; }
+.trainings-conducted-table col.tc-col-budget { width: 6.25rem; min-width: 6.25rem; }
+.trainings-conducted-table col.tc-col-rating { width: 3.35rem; min-width: 3.35rem; }
+.trainings-conducted-table col.tc-col-actions { width: 5.75rem; min-width: 5.75rem; }
 
 .trainings-conducted-table .tc-col-actions {
     text-align: center;
@@ -2444,6 +2490,146 @@ th { background: #f9fafb; font-size: 0.85rem; }
     text-align: center;
     padding-left: 0.2rem;
     padding-right: 0.2rem;
+}
+
+.eso-trainings-paper .trainings-conducted-table td .proposal-textarea-compact,
+.eso-trainings-paper .trainings-conducted-table td input:not([type="hidden"]),
+.eso-trainings-paper .trainings-conducted-table td select {
+    border: 1px solid #111;
+}
+
+.eso-trainings-paper .trainings-conducted-table-wrap::-webkit-scrollbar {
+    height: 12px;
+}
+
+.eso-trainings-paper .trainings-conducted-table-wrap::-webkit-scrollbar-track {
+    background: #fff;
+    border: 1px solid #111;
+    border-radius: 0;
+}
+
+.eso-trainings-paper .trainings-conducted-table-wrap::-webkit-scrollbar-thumb {
+    background: #111;
+    border-radius: 0;
+}
+
+/* Research Extension forms: black rule lines, readable text, horizontal scroll */
+.eso-extension-paper .proposal-table thead th,
+.eso-trainings-paper .proposal-table thead th {
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.eso-extension-paper .proposal-table-wrap,
+.eso-extension-paper .trainings-conducted-table-wrap,
+.eso-trainings-paper .trainings-conducted-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.eso-extension-paper .trainings-conducted-table,
+.eso-extension-paper .technical-advisory-table,
+.eso-extension-paper .extension-linkages-table,
+.eso-extension-paper .outreach-activities-table,
+.eso-extension-paper .technology-adoption-table,
+.eso-extension-paper .attendance-sheet-table,
+.eso-extension-paper .eso-framework-table,
+.eso-extension-paper .eso-workplan-table,
+.eso-extension-paper .eso-team-duties-table,
+.eso-trainings-paper .trainings-conducted-table {
+    width: max-content;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+.eso-extension-paper .eso-identifying-table,
+.eso-extension-paper .completed-researches-meta-table,
+.eso-extension-paper .ebalwasyon-eval-table {
+    width: 100%;
+    min-width: 0;
+    table-layout: auto;
+}
+
+.eso-extension-paper .technical-advisory-table { min-width: 96rem; }
+.eso-extension-paper .extension-linkages-table { min-width: 84rem; }
+.eso-extension-paper .outreach-activities-table { min-width: 52rem; }
+.eso-extension-paper .technology-adoption-table { min-width: 88rem; }
+.eso-extension-paper .attendance-sheet-table { min-width: 72rem; }
+.eso-extension-paper .ebalwasyon-eval-table { min-width: 42rem; }
+
+.eso-extension-paper .extension-linkages-table thead th,
+.eso-extension-paper .extension-linkages-table tbody td {
+    min-width: 8.25rem;
+}
+
+.eso-extension-paper .extension-linkages-table thead th:nth-child(1),
+.eso-extension-paper .extension-linkages-table tbody td:nth-child(1),
+.eso-extension-paper .extension-linkages-table thead th:nth-child(3),
+.eso-extension-paper .extension-linkages-table tbody td:nth-child(3),
+.eso-extension-paper .extension-linkages-table thead th:nth-child(6),
+.eso-extension-paper .extension-linkages-table tbody td:nth-child(6) {
+    min-width: 12rem;
+}
+
+.eso-extension-paper .outreach-activities-table thead th:nth-child(1),
+.eso-extension-paper .outreach-activities-table tbody td:nth-child(1) {
+    min-width: 12rem;
+}
+
+.eso-extension-paper .attendance-sheet-table th,
+.eso-extension-paper .attendance-sheet-table td {
+    min-width: 7.5rem;
+}
+
+.eso-extension-paper .attendance-sheet-table .attendance-no-col,
+.eso-extension-paper .attendance-sheet-table .attendance-sex-col {
+    min-width: 3.5rem;
+}
+
+.eso-extension-paper .ebalwasyon-eval-table th:first-child,
+.eso-extension-paper .ebalwasyon-eval-table td:first-child {
+    min-width: 16rem;
+    white-space: normal;
+}
+
+.eso-extension-paper .trainings-conducted-table td .proposal-textarea-compact,
+.eso-extension-paper .trainings-conducted-table td input:not([type="hidden"]),
+.eso-extension-paper .trainings-conducted-table td select,
+.eso-extension-paper .proposal-table td .proposal-textarea-compact,
+.eso-extension-paper .proposal-table td input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+.eso-extension-paper .proposal-table td select,
+.eso-trainings-paper .trainings-conducted-table td .proposal-textarea-compact,
+.eso-trainings-paper .trainings-conducted-table td input:not([type="hidden"]),
+.eso-trainings-paper .trainings-conducted-table td select {
+    border: 1px solid #111;
+}
+
+.eso-extension-paper input[type="date"],
+.eso-trainings-paper input[type="date"] {
+    min-width: 8.25rem;
+}
+
+.eso-extension-paper .proposal-table-wrap::-webkit-scrollbar,
+.eso-extension-paper .trainings-conducted-table-wrap::-webkit-scrollbar,
+.eso-trainings-paper .trainings-conducted-table-wrap::-webkit-scrollbar {
+    height: 12px;
+}
+
+.eso-extension-paper .proposal-table-wrap::-webkit-scrollbar-track,
+.eso-extension-paper .trainings-conducted-table-wrap::-webkit-scrollbar-track,
+.eso-trainings-paper .trainings-conducted-table-wrap::-webkit-scrollbar-track {
+    background: #fff;
+    border: 1px solid #111;
+    border-radius: 0;
+}
+
+.eso-extension-paper .proposal-table-wrap::-webkit-scrollbar-thumb,
+.eso-extension-paper .trainings-conducted-table-wrap::-webkit-scrollbar-thumb,
+.eso-trainings-paper .trainings-conducted-table-wrap::-webkit-scrollbar-thumb {
+    background: #111;
+    border-radius: 0;
 }
 
 .trainings-conducted-section-row td {
@@ -2994,6 +3180,7 @@ th { background: #f9fafb; font-size: 0.85rem; }
 .journal-citation-table-wrap,
 .book-citation-table-wrap {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .journal-citation-table,
@@ -3017,6 +3204,110 @@ th { background: #f9fafb; font-size: 0.85rem; }
     min-width: 0;
     max-width: 100%;
     box-sizing: border-box;
+}
+
+/* Faculty Journal Citation — rem widths so columns stay readable and scroll horizontally */
+.journal-citation-paper .journal-citation-table.trainings-conducted-table {
+    width: max-content;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+.journal-citation-paper .journal-citation-table thead th:nth-child(1),
+.journal-citation-paper .journal-citation-table tbody td:nth-child(1) { min-width: 9rem; }
+.journal-citation-paper .journal-citation-table thead th:nth-child(2),
+.journal-citation-paper .journal-citation-table tbody td:nth-child(2) { min-width: 11rem; }
+.journal-citation-paper .journal-citation-table thead th:nth-child(3),
+.journal-citation-paper .journal-citation-table tbody td:nth-child(3) { min-width: 12rem; }
+.journal-citation-paper .journal-citation-table thead th:nth-child(4),
+.journal-citation-paper .journal-citation-table tbody td:nth-child(4) { min-width: 11rem; }
+.journal-citation-paper .journal-citation-table thead th:nth-child(5),
+.journal-citation-paper .journal-citation-table tbody td:nth-child(5) { min-width: 9rem; }
+.journal-citation-paper .journal-citation-table thead th:nth-child(6),
+.journal-citation-paper .journal-citation-table tbody td:nth-child(6) { min-width: 12rem; }
+.journal-citation-paper .journal-citation-table thead th:nth-child(7),
+.journal-citation-paper .journal-citation-table tbody td:nth-child(7) { min-width: 5.5rem; }
+.journal-citation-paper .journal-citation-table thead th:nth-child(8),
+.journal-citation-paper .journal-citation-table tbody td:nth-child(8) { min-width: 5.5rem; }
+.journal-citation-paper .journal-citation-table thead th:nth-child(9),
+.journal-citation-paper .journal-citation-table tbody td:nth-child(9) { min-width: 5.5rem; }
+.journal-citation-paper .journal-citation-table thead th:nth-child(10),
+.journal-citation-paper .journal-citation-table tbody td:nth-child(10) { min-width: 8rem; }
+.journal-citation-paper .journal-citation-table thead th:nth-child(11),
+.journal-citation-paper .journal-citation-table tbody td:nth-child(11) { min-width: 10rem; }
+.journal-citation-paper .journal-citation-table thead th:nth-child(12),
+.journal-citation-paper .journal-citation-table tbody td:nth-child(12) { min-width: 5.75rem; }
+
+.journal-citation-paper .journal-citation-table td .proposal-textarea-compact {
+    min-height: 3.75rem;
+    resize: vertical;
+}
+
+.journal-citation-paper .journal-citation-table-wrap::-webkit-scrollbar {
+    height: 10px;
+}
+
+.journal-citation-paper .journal-citation-table-wrap::-webkit-scrollbar-track {
+    background: #dbe3ea;
+    border-radius: 8px;
+}
+
+.journal-citation-paper .journal-citation-table-wrap::-webkit-scrollbar-thumb {
+    background: #64748b;
+    border-radius: 8px;
+}
+
+/* Faculty Book Citation — rem widths so columns stay readable and scroll horizontally */
+.book-citation-paper .book-citation-table.trainings-conducted-table {
+    width: max-content;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+.book-citation-paper .book-citation-table thead th:nth-child(1),
+.book-citation-paper .book-citation-table tbody td:nth-child(1) { min-width: 12rem; }
+.book-citation-paper .book-citation-table thead th:nth-child(2),
+.book-citation-paper .book-citation-table tbody td:nth-child(2) { min-width: 11rem; }
+.book-citation-paper .book-citation-table thead th:nth-child(3),
+.book-citation-paper .book-citation-table tbody td:nth-child(3) { min-width: 12rem; }
+.book-citation-paper .book-citation-table thead th:nth-child(4),
+.book-citation-paper .book-citation-table tbody td:nth-child(4) { min-width: 12rem; }
+.book-citation-paper .book-citation-table thead th:nth-child(5),
+.book-citation-paper .book-citation-table tbody td:nth-child(5) { min-width: 11rem; }
+.book-citation-paper .book-citation-table thead th:nth-child(6),
+.book-citation-paper .book-citation-table tbody td:nth-child(6) { min-width: 12rem; }
+.book-citation-paper .book-citation-table thead th:nth-child(7),
+.book-citation-paper .book-citation-table tbody td:nth-child(7) { min-width: 5.5rem; }
+.book-citation-paper .book-citation-table thead th:nth-child(8),
+.book-citation-paper .book-citation-table tbody td:nth-child(8) { min-width: 5.5rem; }
+.book-citation-paper .book-citation-table thead th:nth-child(9),
+.book-citation-paper .book-citation-table tbody td:nth-child(9) { min-width: 5.5rem; }
+.book-citation-paper .book-citation-table thead th:nth-child(10),
+.book-citation-paper .book-citation-table tbody td:nth-child(10) { min-width: 8rem; }
+.book-citation-paper .book-citation-table thead th:nth-child(11),
+.book-citation-paper .book-citation-table tbody td:nth-child(11) { min-width: 8rem; }
+.book-citation-paper .book-citation-table thead th:nth-child(12),
+.book-citation-paper .book-citation-table tbody td:nth-child(12) { min-width: 10rem; }
+.book-citation-paper .book-citation-table thead th:nth-child(13),
+.book-citation-paper .book-citation-table tbody td:nth-child(13) { min-width: 5.75rem; }
+
+.book-citation-paper .book-citation-table td .proposal-textarea-compact {
+    min-height: 3.75rem;
+    resize: vertical;
+}
+
+.book-citation-paper .book-citation-table-wrap::-webkit-scrollbar {
+    height: 10px;
+}
+
+.book-citation-paper .book-citation-table-wrap::-webkit-scrollbar-track {
+    background: #dbe3ea;
+    border-radius: 8px;
+}
+
+.book-citation-paper .book-citation-table-wrap::-webkit-scrollbar-thumb {
+    background: #64748b;
+    border-radius: 8px;
 }
 
 /* Consolidated Journal Citation — wide table with horizontal scroll */
@@ -3139,6 +3430,15 @@ th { background: #f9fafb; font-size: 0.85rem; }
     table-layout: auto;
 }
 
+.inventions-um-paper .inventions-um-table.trainings-conducted-table col.ium-col-title { width: 13rem; min-width: 13rem; }
+.inventions-um-paper .inventions-um-table.trainings-conducted-table col.ium-col-date { width: 8.5rem; min-width: 8.5rem; }
+.inventions-um-paper .inventions-um-table.trainings-conducted-table col.ium-col-inventors { width: 11rem; min-width: 11rem; }
+.inventions-um-paper .inventions-um-table.trainings-conducted-table col.ium-col-patent { width: 11rem; min-width: 11rem; }
+.inventions-um-paper .inventions-um-table.trainings-conducted-table col.ium-col-adopter { width: 12rem; min-width: 12rem; }
+.inventions-um-paper .inventions-um-table.trainings-conducted-table col.ium-col-product { width: 12rem; min-width: 12rem; }
+.inventions-um-paper .inventions-um-table.trainings-conducted-table col.ium-col-drive { width: 10rem; min-width: 10rem; }
+.inventions-um-paper .inventions-um-table.trainings-conducted-table col.ium-col-actions { width: 5.75rem; min-width: 5.75rem; }
+
 .inventions-um-table.trainings-conducted-table thead th:nth-child(1),
 .inventions-um-table.trainings-conducted-table tbody td:nth-child(1) { min-width: 13rem; }
 .inventions-um-table.trainings-conducted-table thead th:nth-child(2),
@@ -3188,9 +3488,28 @@ th { background: #f9fafb; font-size: 0.85rem; }
     box-sizing: border-box;
 }
 
+.inventions-um-paper .inventions-um-table.trainings-conducted-table input[type="date"] {
+    min-width: 8.25rem;
+}
+
 .inventions-um-table td .proposal-textarea-compact {
     min-height: 3.75rem;
     resize: vertical;
+}
+
+.inventions-um-paper .inventions-um-table-wrap::-webkit-scrollbar {
+    height: 12px;
+}
+
+.inventions-um-paper .inventions-um-table-wrap::-webkit-scrollbar-track {
+    background: #fff;
+    border: 1px solid #111;
+    border-radius: 0;
+}
+
+.inventions-um-paper .inventions-um-table-wrap::-webkit-scrollbar-thumb {
+    background: #111;
+    border-radius: 0;
 }
 
 /* OBR Matrix — wide table with horizontal scroll */
@@ -3549,6 +3868,79 @@ th { background: #f9fafb; font-size: 0.85rem; }
         min-height: 2.25rem;
     }
 
+    .trainings-conducted-paper.eso-trainings-paper .eso-trainings-section .trainings-conducted-scroll-hint {
+        display: block;
+    }
+
+    .trainings-conducted-paper.eso-trainings-paper .eso-trainings-section .trainings-conducted-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .trainings-conducted-paper.eso-trainings-paper .eso-trainings-section .trainings-conducted-table {
+        width: max-content;
+        min-width: 126rem;
+        max-width: none;
+        table-layout: auto;
+    }
+
+    .trainings-conducted-paper.eso-trainings-paper .eso-trainings-section .trainings-conducted-table input[type="date"] {
+        min-width: 8.25rem;
+    }
+
+    .trainings-conducted-paper.eso-trainings-paper .eso-trainings-section .trainings-conducted-table td .proposal-textarea-compact {
+        min-height: 2.75rem;
+    }
+
+    .trainings-conducted-paper.eso-extension-paper .trainings-conducted-scroll-hint {
+        display: block;
+    }
+
+    .trainings-conducted-paper.eso-extension-paper .trainings-conducted-table-wrap,
+    .trainings-conducted-paper.eso-extension-paper .proposal-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .trainings-conducted-paper.eso-extension-paper .trainings-conducted-table,
+    .trainings-conducted-paper.eso-extension-paper .technical-advisory-table,
+    .trainings-conducted-paper.eso-extension-paper .extension-linkages-table,
+    .trainings-conducted-paper.eso-extension-paper .outreach-activities-table,
+    .trainings-conducted-paper.eso-extension-paper .technology-adoption-table,
+    .trainings-conducted-paper.eso-extension-paper .attendance-sheet-table {
+        width: max-content;
+        max-width: none;
+        table-layout: auto;
+        min-width: 100%;
+    }
+
+    .trainings-conducted-paper.eso-extension-paper .completed-researches-meta-table,
+    .trainings-conducted-paper.eso-extension-paper .ebalwasyon-eval-table {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        table-layout: auto;
+    }
+
+    .trainings-conducted-paper.eso-extension-paper .technical-advisory-table { min-width: 96rem; }
+    .trainings-conducted-paper.eso-extension-paper .extension-linkages-table { min-width: 84rem; }
+    .trainings-conducted-paper.eso-extension-paper .outreach-activities-table { min-width: 52rem; }
+    .trainings-conducted-paper.eso-extension-paper .technology-adoption-table { min-width: 88rem; }
+    .trainings-conducted-paper.eso-extension-paper .attendance-sheet-table { min-width: 72rem; }
+
+    .trainings-conducted-paper.eso-extension-paper .trainings-conducted-table th,
+    .trainings-conducted-paper.eso-extension-paper .trainings-conducted-table td {
+        min-width: 3.35rem;
+    }
+
+    .trainings-conducted-paper.eso-extension-paper input[type="date"] {
+        min-width: 8.25rem;
+    }
+
+    .trainings-conducted-paper.eso-extension-paper .trainings-conducted-table td .proposal-textarea-compact {
+        min-height: 2.75rem;
+    }
+
     .trainings-conducted-paper .research-output-presented-section .trainings-conducted-scroll-hint,
     .trainings-conducted-paper .consolidated-research-output-presented-section .trainings-conducted-scroll-hint {
         display: block;
@@ -3677,21 +4069,48 @@ th { background: #f9fafb; font-size: 0.85rem; }
         min-height: 3.75rem;
     }
 
-    .trainings-conducted-paper .trainings-conducted-section:has(.inventions-um-table-wrap) .trainings-conducted-scroll-hint,
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-section .trainings-conducted-scroll-hint,
     .trainings-conducted-paper .consolidated-inventions-um-copyrights-section .trainings-conducted-scroll-hint {
         display: block;
     }
 
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-section .trainings-conducted-table-wrap,
     .trainings-conducted-paper .inventions-um-table-wrap {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
 
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table,
     .trainings-conducted-paper .inventions-um-table.trainings-conducted-table {
         width: max-content;
-        min-width: 100%;
+        min-width: 102rem;
         max-width: none;
         table-layout: auto;
+    }
+
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table thead th:nth-child(1),
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table tbody td:nth-child(1) { min-width: 13rem; width: 13rem; }
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table thead th:nth-child(2),
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table tbody td:nth-child(2) { min-width: 8.5rem; width: 8.5rem; }
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table thead th:nth-child(3),
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table tbody td:nth-child(3) { min-width: 9rem; width: 9rem; }
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table thead th:nth-child(4),
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table tbody td:nth-child(4) { min-width: 11rem; width: 11rem; }
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table thead th:nth-child(5),
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table tbody td:nth-child(5) { min-width: 11rem; width: 11rem; }
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table thead th:nth-child(6),
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table tbody td:nth-child(6) { min-width: 9rem; width: 9rem; }
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table thead th:nth-child(7),
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table tbody td:nth-child(7) { min-width: 12rem; width: 12rem; }
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table thead th:nth-child(8),
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table tbody td:nth-child(8) { min-width: 12rem; width: 12rem; }
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table thead th:nth-child(9),
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table tbody td:nth-child(9) { min-width: 10rem; width: 10rem; }
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table thead th:nth-child(10),
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table tbody td:nth-child(10) { min-width: 5.75rem; width: 5.75rem; }
+
+    .trainings-conducted-paper.inventions-um-paper .inventions-um-table.trainings-conducted-table input[type="date"] {
+        min-width: 8.25rem;
     }
 
     .trainings-conducted-paper .inventions-um-table td .proposal-textarea-compact {
@@ -3779,27 +4198,39 @@ th { background: #f9fafb; font-size: 0.85rem; }
         width: 7.5rem;
     }
 
-    .trainings-conducted-paper .journal-citation-table thead th:nth-child(1),
-    .trainings-conducted-paper .journal-citation-table thead th:nth-child(2),
-    .trainings-conducted-paper .journal-citation-table thead th:nth-child(3),
-    .trainings-conducted-paper .journal-citation-table thead th:nth-child(4),
-    .trainings-conducted-paper .journal-citation-table thead th:nth-child(5),
-    .trainings-conducted-paper .journal-citation-table thead th:nth-child(6) {
-        width: 10%;
+    .trainings-conducted-paper.journal-citation-paper .journal-citation-section .trainings-conducted-scroll-hint {
+        display: block;
     }
 
-    .trainings-conducted-paper .journal-citation-table thead th:nth-child(7),
-    .trainings-conducted-paper .journal-citation-table thead th:nth-child(8),
-    .trainings-conducted-paper .journal-citation-table thead th:nth-child(9) {
-        width: 6%;
+    .trainings-conducted-paper.journal-citation-paper .journal-citation-section .journal-citation-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
-    .trainings-conducted-paper .journal-citation-table thead th:nth-child(10) {
-        width: 8%;
+    .trainings-conducted-paper.journal-citation-paper .journal-citation-table.trainings-conducted-table {
+        width: max-content;
+        min-width: 100%;
+        max-width: none;
+        table-layout: auto;
     }
 
-    .trainings-conducted-paper .journal-citation-table thead th:nth-child(11) {
-        width: 5%;
+    .trainings-conducted-paper.journal-citation-paper .journal-citation-table thead th:nth-child(1),
+    .trainings-conducted-paper.journal-citation-paper .journal-citation-table thead th:nth-child(2),
+    .trainings-conducted-paper.journal-citation-paper .journal-citation-table thead th:nth-child(3),
+    .trainings-conducted-paper.journal-citation-paper .journal-citation-table thead th:nth-child(4),
+    .trainings-conducted-paper.journal-citation-paper .journal-citation-table thead th:nth-child(5),
+    .trainings-conducted-paper.journal-citation-paper .journal-citation-table thead th:nth-child(6),
+    .trainings-conducted-paper.journal-citation-paper .journal-citation-table thead th:nth-child(7),
+    .trainings-conducted-paper.journal-citation-paper .journal-citation-table thead th:nth-child(8),
+    .trainings-conducted-paper.journal-citation-paper .journal-citation-table thead th:nth-child(9),
+    .trainings-conducted-paper.journal-citation-paper .journal-citation-table thead th:nth-child(10),
+    .trainings-conducted-paper.journal-citation-paper .journal-citation-table thead th:nth-child(11),
+    .trainings-conducted-paper.journal-citation-paper .journal-citation-table thead th:nth-child(12) {
+        width: auto;
+    }
+
+    .trainings-conducted-paper.journal-citation-paper .journal-citation-table td .proposal-textarea-compact {
+        min-height: 3.75rem;
     }
 
     .trainings-conducted-paper .linkages-section .trainings-conducted-scroll-hint {
@@ -3828,28 +4259,40 @@ th { background: #f9fafb; font-size: 0.85rem; }
         table-layout: auto;
     }
 
-    .trainings-conducted-paper .book-citation-table thead th:nth-child(1),
-    .trainings-conducted-paper .book-citation-table thead th:nth-child(2),
-    .trainings-conducted-paper .book-citation-table thead th:nth-child(3),
-    .trainings-conducted-paper .book-citation-table thead th:nth-child(4),
-    .trainings-conducted-paper .book-citation-table thead th:nth-child(5),
-    .trainings-conducted-paper .book-citation-table thead th:nth-child(6) {
-        width: 9%;
+    .trainings-conducted-paper.book-citation-paper .book-citation-section .trainings-conducted-scroll-hint {
+        display: block;
     }
 
-    .trainings-conducted-paper .book-citation-table thead th:nth-child(7),
-    .trainings-conducted-paper .book-citation-table thead th:nth-child(8),
-    .trainings-conducted-paper .book-citation-table thead th:nth-child(9),
-    .trainings-conducted-paper .book-citation-table thead th:nth-child(10) {
-        width: 5%;
+    .trainings-conducted-paper.book-citation-paper .book-citation-section .book-citation-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
-    .trainings-conducted-paper .book-citation-table thead th:nth-child(11) {
-        width: 7%;
+    .trainings-conducted-paper.book-citation-paper .book-citation-table.trainings-conducted-table {
+        width: max-content;
+        min-width: 100%;
+        max-width: none;
+        table-layout: auto;
     }
 
-    .trainings-conducted-paper .book-citation-table thead th:nth-child(12) {
-        width: 5%;
+    .trainings-conducted-paper.book-citation-paper .book-citation-table thead th:nth-child(1),
+    .trainings-conducted-paper.book-citation-paper .book-citation-table thead th:nth-child(2),
+    .trainings-conducted-paper.book-citation-paper .book-citation-table thead th:nth-child(3),
+    .trainings-conducted-paper.book-citation-paper .book-citation-table thead th:nth-child(4),
+    .trainings-conducted-paper.book-citation-paper .book-citation-table thead th:nth-child(5),
+    .trainings-conducted-paper.book-citation-paper .book-citation-table thead th:nth-child(6),
+    .trainings-conducted-paper.book-citation-paper .book-citation-table thead th:nth-child(7),
+    .trainings-conducted-paper.book-citation-paper .book-citation-table thead th:nth-child(8),
+    .trainings-conducted-paper.book-citation-paper .book-citation-table thead th:nth-child(9),
+    .trainings-conducted-paper.book-citation-paper .book-citation-table thead th:nth-child(10),
+    .trainings-conducted-paper.book-citation-paper .book-citation-table thead th:nth-child(11),
+    .trainings-conducted-paper.book-citation-paper .book-citation-table thead th:nth-child(12),
+    .trainings-conducted-paper.book-citation-paper .book-citation-table thead th:nth-child(13) {
+        width: auto;
+    }
+
+    .trainings-conducted-paper.book-citation-paper .book-citation-table td .proposal-textarea-compact {
+        min-height: 3.75rem;
     }
 
     .trainings-conducted-paper .consolidated-journal-citation-section .trainings-conducted-scroll-hint {

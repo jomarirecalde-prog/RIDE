@@ -34,7 +34,7 @@ $bestPractices = is_string($summaryData['best_practices'] ?? null) ? $summaryDat
 $lessonsLearned = is_string($summaryData['lessons_learned'] ?? null) ? $summaryData['lessons_learned'] : '';
 ?>
 
-<form class="proposal-paper completed-researches-paper trainings-conducted-paper" method="post" enctype="multipart/form-data" action="<?= $isEdit ? base_url('proposals/' . $proposal['id'] . '/outreach-activities') : base_url('proposals/outreach-activities') ?>">
+<form class="proposal-paper completed-researches-paper trainings-conducted-paper eso-extension-paper" method="post" enctype="multipart/form-data" action="<?= $isEdit ? base_url('proposals/' . $proposal['id'] . '/outreach-activities') : base_url('proposals/outreach-activities') ?>">
     <?= csrf_field() ?>
     <?php if (proposal_nav_scope() !== null): ?>
         <input type="hidden" name="nav_scope" value="extension">

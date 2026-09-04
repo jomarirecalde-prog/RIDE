@@ -28,7 +28,7 @@ $collegeDisplay = is_string($summaryData['college_name'] ?? null) && $summaryDat
 $rows = is_array($summaryData['entries'] ?? null) ? $summaryData['entries'] : [];
 ?>
 
-<form class="proposal-paper completed-researches-paper trainings-conducted-paper" method="post" enctype="multipart/form-data" action="<?= $isEdit ? base_url('proposals/' . $proposal['id'] . '/extension-linkages') : base_url('proposals/extension-linkages') ?>">
+<form class="proposal-paper completed-researches-paper trainings-conducted-paper eso-extension-paper" method="post" enctype="multipart/form-data" action="<?= $isEdit ? base_url('proposals/' . $proposal['id'] . '/extension-linkages') : base_url('proposals/extension-linkages') ?>">
     <?= csrf_field() ?>
     <?php if (proposal_nav_scope() !== null): ?>
         <input type="hidden" name="nav_scope" value="extension">

@@ -218,7 +218,7 @@ if ($budgetLineGroups === []) {
 }
 ?>
 
-<form class="proposal-paper completed-researches-paper eso-extension-paper" method="post" action="<?= $isEdit ? base_url('proposals/' . $proposal['id'] . '/update') : base_url('proposals') ?>">
+<form class="proposal-paper completed-researches-paper eso-extension-paper wpu-funded-extension-paper" method="post" action="<?= $isEdit ? base_url('proposals/' . $proposal['id'] . '/update') : base_url('proposals') ?>">
     <?= csrf_field() ?>
     <input type="hidden" name="nav_scope" value="extension">
     <input type="hidden" name="project_type" value="extension">
@@ -435,7 +435,7 @@ if ($budgetLineGroups === []) {
         <?php endif; ?>
         <p class="trainings-conducted-scroll-hint proposal-section-note">Scroll horizontally to view all columns. Use &ldquo;Add member&rdquo; for people who are not in the faculty directory.</p>
         <div class="proposal-table-wrap trainings-conducted-table-wrap">
-            <table class="proposal-table trainings-conducted-table" id="eso-team-duties-table">
+            <table class="proposal-table trainings-conducted-table eso-team-duties-table" id="eso-team-duties-table">
                 <thead>
                     <tr>
                         <th>Member</th>

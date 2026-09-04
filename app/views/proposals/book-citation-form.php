@@ -74,7 +74,7 @@ if ($entries === []) {
         </table>
     </section>
 
-    <section class="proposal-section trainings-conducted-section">
+    <section class="proposal-section trainings-conducted-section book-citation-section">
         <p class="trainings-conducted-scroll-hint proposal-section-note">Scroll horizontally to view all columns, including <strong>Google Drive Link</strong> for attached files.</p>
         <div class="proposal-table-wrap trainings-conducted-table-wrap book-citation-table-wrap">
             <table class="proposal-table book-citation-table trainings-conducted-table">

@@ -36,7 +36,7 @@ $lessonsLearned = is_string($summaryData['lessons_learned'] ?? null) ? $summaryD
     <?php endif; ?>
 </div>
 
-<div class="proposal-paper completed-researches-paper trainings-conducted-paper">
+<div class="proposal-paper completed-researches-paper trainings-conducted-paper eso-extension-paper">
     <header class="completed-researches-header">
         <p class="completed-researches-header-line">Republic of the Philippines</p>
         <p class="completed-researches-header-line completed-researches-header-line--strong">WESTERN PHILIPPINES UNIVERSITY</p>
